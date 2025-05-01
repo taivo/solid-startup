@@ -13,13 +13,21 @@ Everything you need to build a Solid project, powered by [`solid-start`](https:/
 - better-auth (with magic link that mocks email sending via server console.log)
 
 ## How to get started
-- pull repo
 
 ```bash
-cd <REPO_DIR>
-pnpm i
-pnpm db:push  # package.json script to initialize local.db (with better-auth user tables)
+## pull repo
+git clone https://github.com/taivo/solid-startup.git
+
+## install dependencies
+cd solid-startup
+pnpm install
+
+## initialize the local sqlite db
+pnpm db:push
 ```
+
+Look at package.json to see available scripts other than `db:push`
+
 
 ## Creating a project
 
@@ -59,4 +67,3 @@ npm test
 ```
 
 ## This project was created with the [Solid CLI](https://solid-cli.netlify.app)
-
