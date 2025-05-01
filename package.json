@@ -15,7 +15,8 @@
 		"db:migrate": "drizzle-kit migrate",
 		"db:push": "drizzle-kit push",
 		"db:studio": "drizzle-kit studio",
-		"ui:add": "pnpm dlx solidui-cli@latest add"
+		"ui:add": "pnpm dlx solidui-cli@latest add",
+		"knip": "knip"
 	},
 	"type": "module",
 	"dependencies": {
@@ -49,6 +50,7 @@
 		"drizzle-kit": "^0.31.0",
 		"globals": "^16.0.0",
 		"jsdom": "^26.1.0",
+		"knip": "^5.52.0",
 		"solid-js": "^1.9.6",
 		"tailwindcss": "^4.1.5",
 		"typescript": "^5.8.3",
@@ -60,5 +62,6 @@
 	},
 	"engines": {
 		"node": ">=22"
-	}
+	},
+	"packageManager": "pnpm@10.10.0+sha256.fa0f513aa8191764d2b6b432420788c270f07b4f999099b65bb2010eec702a30"
 }

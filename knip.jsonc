@@ -1,0 +1,10 @@
+{
+	"$schema": "https://unpkg.com/knip@5/schema.json",
+	"entry": ["src/app.tsx", "app/hono-server/*.ts"],
+	"project": ["**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx}"],
+	"ignore": ["src/components/ui/*.tsx"],
+	"ignoreDependencies": ["tailwindcss"],
+	"paths": {
+		"~icons/*": ["node_modules/unplugin-icons/types/solid.d.ts"]
+	}
+}
