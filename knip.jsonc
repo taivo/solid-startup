@@ -1,9 +1,9 @@
 {
 	"$schema": "https://unpkg.com/knip@5/schema.json",
-	"entry": ["src/app.tsx", "app/hono-server/*.ts"],
+	"entry": ["src/app.tsx", "app.config.ts", "src/routes/**/*"],
 	"project": ["**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx}"],
 	"ignore": ["src/components/ui/*.tsx"],
-	"ignoreDependencies": ["tailwindcss"],
+	"ignoreDependencies": ["tailwindcss", "tw-animate-css", "@biome/biome"],
 	"paths": {
 		"~icons/*": ["node_modules/unplugin-icons/types/solid.d.ts"]
 	}
