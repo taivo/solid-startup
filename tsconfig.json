@@ -10,7 +10,12 @@
     "allowJs": true,
     "strict": true,
     "noEmit": true,
-    "types": ["vinxi/types/client", "vitest/globals", "@testing-library/jest-dom", "unplugin-icons/types/solid"],
+    "types": [
+			"vinxi/types/client",
+			"vitest/globals",
+			"@testing-library/jest-dom",
+			"unplugin-icons/types/solid"
+		],
     "isolatedModules": true,
     "paths": {
       "~/*": ["./src/*"]

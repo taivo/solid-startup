@@ -34,3 +34,7 @@ Look at package.json to see available scripts other than `db:push`
 ```bash
 pnpm dev
 ```
+
+
+## Cloudflare setup resources
+ - https://developers.cloudflare.com/workers/frameworks/framework-guides/solid/

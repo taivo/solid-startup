@@ -15,6 +15,7 @@ export default defineConfig({
 	},
 	server: {
 		preset: "cloudflare-pages",
+		compatibilityDate: "2025-04-29",
 		rollupConfig: {
 			external: ["node:async_hooks"]
 		}

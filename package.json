@@ -8,9 +8,9 @@
 		"test": "vitest run",
 		"test-watch": "vitest",
 		"test-ui": "vitest --ui",
-		"cf:preview": "pnpm run build && npx wrangler pages dev",
-		"cf:deploy": "pnpm run build && wrangler pages deploy",
-		"cf:typegen": "wrangler types",
+		"preview": "pnpm run build && wrangler pages dev",
+		"deploy": "pnpm run build && wrangler pages deploy",
+		"typegen": "wrangler types",
 		"db:generate": "drizzle-kit generate",
 		"db:migrate": "drizzle-kit migrate",
 		"db:push": "drizzle-kit push",
@@ -54,7 +54,7 @@
 		"unplugin-icons": "^22.1.0",
 		"vite-plugin-solid": "^2.11.6",
 		"vitest": "3.1.2",
-		"wrangler": "^4.13.2"
+		"wrangler": "^4.14.1"
 	},
 	"engines": {
 		"node": ">=22"
