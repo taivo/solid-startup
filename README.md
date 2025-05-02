@@ -37,4 +37,8 @@ pnpm dev
 
 
 ## Cloudflare setup resources
- - https://developers.cloudflare.com/workers/frameworks/framework-guides/solid/
+ - https://developers.cloudflare.com/pages/framework-guides/deploy-a-solid-start-site/
+ - https://developers.cloudflare.com/pages/framework-guides/deploy-a-solid-start-site/ (has bindings info)
+ - https://ryanjc.com/blog/solidstart-cloudflare-pages/
+ - https://github.com/cloudflare/workers-sdk/issues/5912
+ - https://github.com/solidjs/solid-start/issues/1833

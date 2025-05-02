@@ -15,6 +15,7 @@
 		"db:migrate": "drizzle-kit migrate",
 		"db:push": "drizzle-kit push",
 		"db:studio": "drizzle-kit studio",
+		"db:seed": "dotenvx run -- tsx scripts/seed-db.ts",
 		"ui:add": "pnpm dlx solidui-cli@latest add",
 		"knip": "knip"
 	},
@@ -35,6 +36,7 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^1.9.4",
+		"@dotenvx/dotenvx": "^1.42.0",
 		"@iconify-json/lucide": "^1.2.39",
 		"@iconify-json/tabler": "^1.2.17",
 		"@kobalte/tailwindcss": "^0.9.0",
@@ -45,6 +47,7 @@
 		"@types/node": "^22.15.3",
 		"@vitest/ui": "3.1.2",
 		"drizzle-kit": "^0.31.0",
+		"drizzle-seed": "^0.3.1",
 		"globals": "^16.0.0",
 		"jsdom": "^26.1.0",
 		"knip": "^5.52.0",

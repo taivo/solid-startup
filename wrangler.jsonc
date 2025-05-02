@@ -10,16 +10,15 @@
 	"pages_build_output_dir": "./dist",
 	"observability": {
 		"enabled": true
-	}
-	// "d1_databases": [
-	// 	{
-	// 		"binding": "DB",
-	// 		"database_name": "YOUR DB NAME",
-	// 		"database_id": "UNIQUE ID OF YOUR DB",
-	// 		"migrations_dir": "migrations"
-
-	// 	}
-	// ]
+	},
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "solid-startup",
+			"database_id": "af1e900f-06b9-4d71-9ed7-78639cd7dc79",
+			"migrations_dir": "migrations"
+		}
+	]
 
 	/**
 	 * Smart Placement
