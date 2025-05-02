@@ -13,6 +13,7 @@ app.config.timestamp_*.js
 
 # sqlite db
 *.db
+migrations/*
 
 # dependencies
 /node_modules

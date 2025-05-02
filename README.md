@@ -23,7 +23,8 @@ cd solid-startup
 pnpm install
 
 ## initialize the local sqlite db
-pnpm db:push
+pnpm db:generate    # to generate migration files
+pnpm db:migrate
 ```
 
 Look at package.json to see available scripts other than `db:push`

@@ -49,8 +49,8 @@ importers:
         specifier: ^1.9.4
         version: 1.9.4
       '@dotenvx/dotenvx':
-        specifier: ^1.42.0
-        version: 1.42.0
+        specifier: ^1.42.2
+        version: 1.42.2
       '@iconify-json/lucide':
         specifier: ^1.2.39
         version: 1.2.39
@@ -384,8 +384,8 @@ packages:
     resolution: {integrity: sha512-KrkT6qO5NxqNfy68sBl6CTSoJ4SNDIS5iQArkibhlbGU4LaDukZ3q2HIkh8aUKDio6o4itU4xDR7t82Y2eP1Bg==}
     engines: {node: '>=14'}
 
-  '@dotenvx/dotenvx@1.42.0':
-    resolution: {integrity: sha512-tvaUA4gX4QsYvXug+UuiXbHk20PacpFAyrxTHJJoJ2wiCjGzkfTIMgWlxJ2WKsGyUbNCAnQKRTStqO370uwAbA==}
+  '@dotenvx/dotenvx@1.42.2':
+    resolution: {integrity: sha512-+3KZS/T2dKfi1X3+lFzcAMQFc5bd+Ew/iwZ3TNEzpFwnrwvh9vZJHQCekfyWmQnj8KnAeUiOur3Yh5rTrEi5IQ==}
     hasBin: true
 
   '@drizzle-team/brocli@0.10.2':
@@ -2875,8 +2875,8 @@ packages:
   ee-first@1.1.1:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
 
-  electron-to-chromium@1.5.148:
-    resolution: {integrity: sha512-8uc1QXwwqayD4mblcsQYZqoi+cOc97A2XmKSBOIRbEAvbp6vrqmSYs4dHD2qVygUgn7Mi0qdKgPaJ9WC8cv63A==}
+  electron-to-chromium@1.5.149:
+    resolution: {integrity: sha512-UyiO82eb9dVOx8YO3ajDf9jz2kKyt98DEITRdeLPstOEuTlLzDA4Gyq5K9he71TQziU5jUVu2OAu5N48HmQiyQ==}
 
   emoji-regex-xs@1.0.0:
     resolution: {integrity: sha512-LRlerrMYoIDrT6jgpeZ2YYl/L8EulRTt5hQcYjy5AInh7HWXKimpqx68aknBFpGL2+/IcogTcaydJEgaTmOpDg==}
@@ -3589,6 +3589,7 @@ packages:
 
   libsql@0.5.8:
     resolution: {integrity: sha512-+OopMI1wM/NvAJTHf3O3+beHd1YfKLnSVsOGBl3/7UBDZ4ydVadkbBk5Hjjs9d3ALC5rBaftMY59AvwyC8MzPw==}
+    cpu: [x64, arm64, wasm32]
     os: [darwin, linux, win32]
 
   lightningcss-darwin-arm64@1.29.2:
@@ -5553,7 +5554,7 @@ snapshots:
       gonzales-pe: 4.3.0
       node-source-walk: 6.0.2
 
-  '@dotenvx/dotenvx@1.42.0':
+  '@dotenvx/dotenvx@1.42.2':
     dependencies:
       commander: 11.1.0
       dotenv: 16.5.0
@@ -7356,7 +7357,7 @@ snapshots:
   browserslist@4.24.4:
     dependencies:
       caniuse-lite: 1.0.30001716
-      electron-to-chromium: 1.5.148
+      electron-to-chromium: 1.5.149
       node-releases: 2.0.19
       update-browserslist-db: 1.1.3(browserslist@4.24.4)
 
@@ -7751,7 +7752,7 @@ snapshots:
 
   ee-first@1.1.1: {}
 
-  electron-to-chromium@1.5.148: {}
+  electron-to-chromium@1.5.149: {}
 
   emoji-regex-xs@1.0.0: {}
 
