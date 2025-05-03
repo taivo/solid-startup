@@ -1,4 +1,6 @@
 import { readdirSync } from "node:fs"
+import { getRequestEvent } from "solid-js/web"
+import { getPlatformProxy } from "wrangler"
 
 export function getMiniflareD1Path() {
 	/**
@@ -16,4 +18,18 @@ export function getMiniflareD1Path() {
 	}
 
 	return `${miniflarePath}/${localD1File}`
+}
+
+export async function cfDevEnv() {
+	"use server"
+
+	const { env } = await getPlatformProxy()
+	return env as unknown as Cloudflare.Env
+}
+
+export function cfContext() {
+	"use server"
+	const event = getRequestEvent()
+
+	return event?.nativeEvent?.context?.cloudflare ?? {}
 }
