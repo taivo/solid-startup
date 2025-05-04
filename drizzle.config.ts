@@ -33,6 +33,8 @@ function getCredentials() {
 		}
 		: {
 			dbCredentials: {
+				// FIXME: this is problematic because there may be multiple .sqlite files in miniflare
+				// getLocalD1File only returns the first one found
 				url: `file:${getLocalD1File()}`,
 			},
 		}

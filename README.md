@@ -24,7 +24,7 @@ pnpm install
 
 ## initialize the local sqlite db
 pnpm db:generate    # to generate migration files
-pnpm db:migrate
+pnpm db:migrate     # this will migrate database and make sure local D1 files exist
 ```
 
 Look at package.json to see available scripts other than `db:push`

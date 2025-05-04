@@ -16,10 +16,12 @@
 			"binding": "DB",
 			"database_name": "solid-startup",
 			"database_id": "af1e900f-06b9-4d71-9ed7-78639cd7dc79",
-			"preview_database_id": "local-test.db",
+			//wrangler d1 migrations apply solid-startup --local
+			"preview_database_id": "solid-startup-local",
 			"migrations_dir": "migrations"
 		}
-	]
+	],
+	"vars": { "TEST_VARIABLE": "test" }
 
 	/**
 	 * Smart Placement
@@ -34,11 +36,6 @@
 	 * https://developers.cloudflare.com/workers/runtime-apis/bindings/
 	 */
 
-	/**
-	 * Environment Variables
-	 * https://developers.cloudflare.com/workers/wrangler/configuration/#environment-variables
-	 */
-	// "vars": { "MY_VARIABLE": "production_value" },
 	/**
 	 * Note: Use secrets to store sensitive data.
 	 * https://developers.cloudflare.com/workers/configuration/secrets/
