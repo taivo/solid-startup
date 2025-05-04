@@ -1,5 +1,5 @@
 import { defineConfig } from "drizzle-kit"
-import { getLocalD1File, getWranglerD1Config } from "~/lib/cf-utils"
+import { getLocalD1File, getWranglerD1Config } from "./scripts/script-helpers"
 
 export default defineConfig({
 	out: "./migrations",
