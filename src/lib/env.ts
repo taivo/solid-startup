@@ -1,7 +1,10 @@
 import { getRequestEvent } from "solid-js/web"
 
-// cloudflare directions: https://ryanjc.com/blog/solidstart-cloudflare-pages/
-export function serverEnv() {
+export const serverEnv = getServerEnv()
+
+
+// cloudflare env directions: https://ryanjc.com/blog/solidstart-cloudflare-pages/
+function getServerEnv() {
 	"use server"
 
 	// NOTE: ideally we should just extract the cloudflare env from the request event ourselves
@@ -13,15 +16,7 @@ export function serverEnv() {
 	//
 	// Having a synchronous serverEnv() makes many things simpler, including defining and exporting lib.db
 	// synchronously.
-	return getRequestEvent()?.locals.serverEnv
-
-
-	// if(isCfRuntime()) {
-	// 	return cfEnv()
-	// } else {
-	// 	const wrangler = await import('wrangler')
-	// 	const platform = await wrangler.getPlatformProxy()
-	// }
-	// biome-ignore lint/nursery/noProcessEnv: solid+vite not picking up .env server variables for import.meta.env
-	//return cfEnv() ?? process.env //have to use processs.env bc server vars not showing up in import.meta.env
+	const env = getRequestEvent()?.locals.serverEnv
+	console.log('getServerEnv called', env)
+	return env
 }
