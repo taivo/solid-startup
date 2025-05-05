@@ -19,5 +19,6 @@ export default defineConfig({
 		rollupConfig: {
 			external: ["node:async_hooks"]
 		}
-	}
+	},
+	middleware: "./src/middleware.ts"
 })
