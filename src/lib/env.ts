@@ -11,12 +11,10 @@ function getServerEnv() {
 	// but currently DEV mode runs in Node and cloudflare's getPlatformProxy is an async function.
 	// We have to use middleware to inject env into locals so we can use it here synchronously.
 	//
-	// For this serverEnv() function to work synchronously, we rely on middlewares to inject either
+	// For this getServerEnv() function to work synchronously, we rely on middlewares to inject either
 	// getPlatformProxy() env or real cloudflare env into locals.serverEnv
 	//
 	// Having a synchronous serverEnv() makes many things simpler, including defining and exporting lib.db
 	// synchronously.
-	const env = getRequestEvent()?.locals.serverEnv
-	console.log('getServerEnv called', env)
-	return env
+	return getRequestEvent()?.locals.serverEnv
 }
