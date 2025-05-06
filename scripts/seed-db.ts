@@ -1,12 +1,12 @@
 import { seed } from "drizzle-seed"
 import { user } from "~/schema/auth-schema"
-import { withLocalD1 } from "./script-helpers"
+import { withLocalDb } from "./script-helpers"
 
 //
 // https://orm.drizzle.team/docs/seed-overview
 //
 async function main() {
-	withLocalD1(async (db) => {
+	withLocalDb(async (db) => {
 		const schema = { user }
 
 		// the d1 driver doesn't like too many statements all at once, so we seed

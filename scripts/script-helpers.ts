@@ -4,7 +4,7 @@ import { parse as parseJSONC } from "jsonc-parser"
 import { getPlatformProxy } from "wrangler"
 import { getDb } from "~/lib/db"
 
-export async function withLocalD1(doWerk: (db: ReturnType<typeof getDb>) => Promise<void>) {
+export async function withLocalDb(doWerk: (db: ReturnType<typeof getDb>) => Promise<void>) {
 	const platform = await getPlatformProxy<Env>()
 	const db = getDb(platform.env.DB)
 
@@ -13,42 +13,57 @@ export async function withLocalD1(doWerk: (db: ReturnType<typeof getDb>) => Prom
 	await platform.dispose()
 }
 
-export function getLocalD1File(databaseId: string) {
-	/**
-	 * @example
-	 * ```ts @import.meta.vitest
-	 * expect(getMiniflareD1Path().endsWith(".sqlite")).toBe(true)
-	 * ```
-	 */
-	const durableObjKey = "miniflare-D1DatabaseObject" as const
-	const miniflarePath = `.wrangler/state/v3/d1/${durableObjKey}` as const
-	const filename = `${miniflarePath}/${durableObjectNamespaceIdFromName(durableObjKey, databaseId)}.sqlite`
+export class D1Config {
+	binding: string
+	database_name: string
+	database_id: string
+	preview_database_id?: string
+	migrations_dir?: string
 
-	if (!existsSync(filename)) {
-		throw new Error(`Could not find local D1 file: [${filename}] for databaseId [${databaseId}]`)
+	static load(bindingName?: string) {
+		const d1_databases = loadWranglerConfig().d1_databases
+
+		if (d1_databases.length === 1 && !bindingName) {
+			// return the only config if no bindingName is specified
+			return d1_databases[0]
+		}
+
+		// find and return the specified binding
+		const cfg = d1_databases.find((db: { binding: string }) => db.binding === bindingName)
+		if (!cfg) {
+			throw new Error(`Could not find wrangler config for D1 binding: [${bindingName}]`)
+		}
+
+		return new D1Config(cfg)
 	}
 
-	return filename
+	private constructor(cfg: Record<string, string>) {
+		this.binding = cfg.binding
+		this.database_name = cfg.database_name
+		this.database_id = cfg.database_id
+		this.preview_database_id = cfg.preview_database_id
+		this.migrations_dir = cfg.migrations_dir
+	}
+
+	get localDatabaseId() {
+		return this.preview_database_id || this.database_id
+	}
+
+	get localSqliteFile() {
+		const uniqueKey = "miniflare-D1DatabaseObject" as const
+		const miniflarePath = `.wrangler/state/v3/d1/${uniqueKey}` as const
+		const filename = `${miniflarePath}/${durableObjectNamespaceIdFromName(uniqueKey, this.localDatabaseId)}.sqlite`
+
+		if (!existsSync(filename)) {
+			throw new Error(`Could not find Sqlite file: [${filename}] for databaseId [${this.localDatabaseId}]`)
+		}
+
+		return filename
+	}
 }
 
-export function getWranglerD1Config(bindingName?: string) {
-	const d1_databases = getWranglerConfig().d1_databases
 
-	if (d1_databases.length === 1 && !bindingName) {
-		// return the only config if no bindingName is specified
-		return d1_databases[0]
-	}
-
-	// find and return the specified binding
-	const cfg = d1_databases.find((db: { binding: string }) => db.binding === bindingName)
-	if (!cfg) {
-		throw new Error(`Could not find wrangler config for D1 binding: [${bindingName}]`)
-	}
-
-	return cfg
-}
-
-function getWranglerConfig() {
+function loadWranglerConfig() {
 	const configPath = "./wrangler.jsonc"
 	const rawContent = readFileSync(configPath, "utf-8")
 	return parseJSONC(rawContent)
