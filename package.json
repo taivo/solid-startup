@@ -8,13 +8,16 @@
 		"test": "vitest run",
 		"test-watch": "vitest",
 		"test-ui": "vitest --ui",
+
 		"preview": "pnpm run build && wrangler pages dev",
 		"deploy": "pnpm run build && wrangler pages deploy",
 		"typegen": "wrangler types",
+
 		"db:generate": "drizzle-kit generate",
 		"db:migrate": "drizzle-kit migrate",
 		"db:studio": "drizzle-kit studio",
 		"db:seed": "dotenvx run -- tsx scripts/seed-db.ts",
+
 		"ui:add": "pnpm dlx solidui-cli@latest add",
 		"knip": "knip"
 	},

@@ -39,6 +39,8 @@ export function getWranglerD1Config(bindingName: string) {
 		throw new Error(`Could not find wrangler config for D1 binding: [${bindingName}]`)
 	}
 
+	console.log("wrangler config", cfg)
+
 	return cfg
 }
 

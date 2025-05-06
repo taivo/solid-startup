@@ -10,6 +10,7 @@ export default defineConfig({
 })
 
 function getCredentials() {
+	console.log("GET CREDENTIALS")
 	// biome-ignore lint/nursery/noProcessEnv: <explanation>
 	const { CLOUDFLARE_ACCOUNT_ID, CLOUDFLARE_D1_TOKEN } = process.env
 	const CLOUDFLARE_D1_ID = CLOUDFLARE_ACCOUNT_ID ? getWranglerD1Config("DB").database_id : null

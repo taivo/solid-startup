@@ -6,7 +6,7 @@ import db from "~/lib/db"
 import * as authSchema from "~/schema/auth-schema"
 
 type SendMagicLinkFn = Parameters<typeof magicLink>[0]["sendMagicLink"]
-const mockSendMagicLink: SendMagicLinkFn = async ({ email, url }, _request) => {
+const __devMockSendMagicLink: SendMagicLinkFn = async ({ email, url }, _request) => {
 	if (import.meta.env.DEV) {
 		// print to dev server console
 		console.warn("DEV MODE ONLY:", email, url)
@@ -19,6 +19,6 @@ const mockSendMagicLink: SendMagicLinkFn = async ({ email, url }, _request) => {
 export const auth = betterAuth({
 	database: drizzleAdapter(db, { provider: "sqlite", schema: { ...authSchema } }),
 	plugins: [magicLink({
-		sendMagicLink: mockSendMagicLink
+		sendMagicLink: __devMockSendMagicLink
 	})]
 })
