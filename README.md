@@ -43,3 +43,5 @@ pnpm dev
  - https://ryanjc.com/blog/solidstart-cloudflare-pages/
  - https://github.com/cloudflare/workers-sdk/issues/5912
  - https://github.com/solidjs/solid-start/issues/1833
+ - https://github.com/cloudflare/workers-sdk/issues/4548 (understand the hash of the local D1 filename)
+ - https://github.com/cloudflare/miniflare/releases/tag/v3.20230918.0 (code to generate local D1 filename)

@@ -10,10 +10,11 @@ export default defineConfig({
 })
 
 function getCredentials() {
-	console.log("GET CREDENTIALS")
+	const d1Config = getWranglerD1Config("DB")
+
 	// biome-ignore lint/nursery/noProcessEnv: <explanation>
 	const { CLOUDFLARE_ACCOUNT_ID, CLOUDFLARE_D1_TOKEN } = process.env
-	const CLOUDFLARE_D1_ID = CLOUDFLARE_ACCOUNT_ID ? getWranglerD1Config("DB").database_id : null
+	const CLOUDFLARE_D1_ID = CLOUDFLARE_ACCOUNT_ID ? d1Config.database_id : null
 
 	const isRemote = CLOUDFLARE_ACCOUNT_ID && CLOUDFLARE_D1_TOKEN && CLOUDFLARE_D1_ID
 
@@ -36,7 +37,7 @@ function getCredentials() {
 			dbCredentials: {
 				// FIXME: this is problematic because there may be multiple .sqlite files in miniflare
 				// getLocalD1File only returns the first one found
-				url: `file:${getLocalD1File()}`,
+				url: `file:${getLocalD1File(d1Config.preview_database_id || d1Config.database_id)}`,
 			},
 		}
 }
