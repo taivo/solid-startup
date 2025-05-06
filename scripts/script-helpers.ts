@@ -5,6 +5,7 @@ import { getDb } from "~/lib/db"
 
 export async function withLocalD1(action: (db: ReturnType<typeof getDb>) => Promise<void>) {
 	const platform = await getPlatformProxy<Env>()
+	console.log("scriptHelper")
 	const db = getDb(platform.env.DB)
 
 	await action(db)

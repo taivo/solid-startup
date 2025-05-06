@@ -16,5 +16,11 @@ function getServerEnv() {
 	//
 	// Having a synchronous serverEnv() makes many things simpler, including defining and exporting lib.db
 	// synchronously.
-	return getRequestEvent()?.locals.serverEnv
+	const env = getRequestEvent()?.locals.serverEnv
+
+	if (!env) {
+		console.warn("* serverEnv is empty. Ignore this if you're only running 1-off scripts outside without a server")
+	}
+
+	return (env ?? {}) as Env
 }
