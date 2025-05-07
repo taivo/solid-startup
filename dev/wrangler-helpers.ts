@@ -1,6 +1,6 @@
 import crypto from "node:crypto"
-import { existsSync, readFileSync } from "node:fs"
-import { parse as parseJSONC } from "jsonc-parser"
+import { existsSync } from "node:fs"
+import { unstable_readConfig } from "wrangler"
 
 export class D1Config {
 	binding: string
@@ -52,7 +52,7 @@ export class D1Config {
 
 	get sqliteLocalCredentials() {
 		return {
-			url: `file:${D1Config.load().sqliteLocalFile}`
+			url: `file:${D1Config.load().sqliteLocalFile}`,
 		}
 	}
 
@@ -74,9 +74,7 @@ export class D1Config {
 }
 
 function loadWranglerConfig() {
-	const configPath = "./wrangler.jsonc"
-	const rawContent = readFileSync(configPath, "utf-8")
-	return parseJSONC(rawContent)
+	return unstable_readConfig({})
 }
 
 function durableObjectNamespaceIdFromName(uniqueKey: string, name: string) {
