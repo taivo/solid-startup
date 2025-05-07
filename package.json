@@ -13,7 +13,9 @@
 		"typegen": "wrangler types",
 		"db:generate": "drizzle-kit generate",
 		"db:migrate": "drizzle-kit migrate",
+		"db:migrate-prod": "wrangler d1 migrations",
 		"db:studio": "drizzle-kit studio",
+		"db:studio-prod": "dotenvx run -- drizzle-kit studio --config ./drizzle.config.prod.ts",
 		"db:seed": "dotenvx run -- tsx scripts/seed-db.ts",
 		"ui:add": "pnpm dlx solidui-cli@latest add",
 		"knip": "knip"
@@ -37,7 +39,7 @@
 	"devDependencies": {
 		"@biomejs/biome": "^1.9.4",
 		"@dotenvx/dotenvx": "^1.43.0",
-		"@iconify-json/lucide": "^1.2.40",
+		"@iconify-json/lucide": "^1.2.41",
 		"@iconify-json/tabler": "^1.2.17",
 		"@inquirer/prompts": "^7.5.0",
 		"@kobalte/tailwindcss": "^0.9.0",
@@ -50,7 +52,7 @@
 		"@vitest/ui": "3.1.3",
 		"drizzle-kit": "^0.31.1",
 		"drizzle-seed": "^0.3.1",
-		"globals": "^16.0.0",
+		"globals": "^16.1.0",
 		"jsdom": "^26.1.0",
 		"jsonc-parser": "^3.3.1",
 		"knip": "^5.54.1",

@@ -51,9 +51,11 @@ export function getProdD1Credentials(bindingName?: string) {
 		throw new Error("CLOUDFLARE_ACCOUNT_ID and CLOUDFLARE_D1_TOKEN not set")
 	}
 
+	console.log("Using CLOUDFLARE_ACCOUNT_ID and CLOUDFLARE_D1_TOKEN for prod D1 credentials")
+
 	return {
 		accountId: CLOUDFLARE_ACCOUNT_ID as string,
-		databaseId: D1Config.load(bindingName).databaseId as string,
+		databaseId: D1Config.load(bindingName).database_id as string,
 		token: CLOUDFLARE_D1_TOKEN as string,
 	}
 }
@@ -70,7 +72,7 @@ export class D1Config {
 
 		if (d1_databases.length === 1 && !bindingName) {
 			// return the only config if no bindingName is specified
-			return d1_databases[0]
+			return new D1Config(d1_databases[0])
 		}
 
 		// find and return the specified binding

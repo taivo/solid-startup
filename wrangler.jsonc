@@ -16,7 +16,6 @@
 			"binding": "DB",
 			"database_name": "solid-startup",
 			"database_id": "af1e900f-06b9-4d71-9ed7-78639cd7dc79",
-			//wrangler d1 migrations apply solid-startup --local
 			"preview_database_id": "solid-startup-local",
 			"migrations_dir": "drizzle/migrations"
 		}
