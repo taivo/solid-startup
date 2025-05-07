@@ -1,5 +1,5 @@
 import { type Config, defineConfig } from "drizzle-kit"
-import { D1Config } from "./scripts/script-helpers"
+import { D1Config } from "./dev/wrangler-helpers"
 
 export const drizzleBaseConfig = {
 	out: "./drizzle/migrations",
@@ -9,7 +9,5 @@ export const drizzleBaseConfig = {
 
 export default defineConfig({
 	...drizzleBaseConfig,
-	dbCredentials: {
-		url: `file:${D1Config.load().localSqliteFile}`,
-	}
+	dbCredentials: D1Config.load().sqliteLocalCredentials,
 })

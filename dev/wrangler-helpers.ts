@@ -1,64 +1,6 @@
 import crypto from "node:crypto"
 import { existsSync, readFileSync } from "node:fs"
-import { confirm } from '@inquirer/prompts'
 import { parse as parseJSONC } from "jsonc-parser"
-import { getPlatformProxy } from "wrangler"
-import { getDb } from "~/lib/db"
-import { drizzle as drizzleD1Proxy } from "../drizzle/d1-http"
-
-export type LocalDatabase = ReturnType<typeof getDb>
-export type RemoteDatabase = ReturnType<typeof drizzleD1Proxy>
-export type Database = LocalDatabase | RemoteDatabase
-
-export async function withLocalDb(doWerk: (db: LocalDatabase) => Promise<void>) {
-	const platform = await getPlatformProxy<Env>()
-	const db = getDb(platform.env.DB)
-
-	await doWerk(db)
-
-	await platform.dispose()
-}
-
-export async function withRemoteDb(doWerk: (db: RemoteDatabase) => Promise<void>) {
-	const db = drizzleD1Proxy(getProdD1Credentials())
-	await doWerk(db)
-}
-
-export async function withDatabase(doWerk: (db: Database) => Promise<void>) {
-	if (process.argv.includes("--remote")) {
-		const answer = await confirm({ message: '*** You are about to run this script on the production database. Are you sure?', default: false })
-		if (answer) {
-			withRemoteDb(doWerk)
-		} else {
-			console.log("Aborting...")
-			process.exit(0)
-		}
-	} else {
-		withLocalDb(doWerk)
-	}
-}
-
-export function getProdD1Credentials(bindingName?: string) {
-	//
-	// NOTE: this is only used to run local scripts that needs to act on the
-	// remote production database. Use it sparingly.
-	// Interactions with D1 inside the deployed app do not need these credentials.
-	//
-
-	// biome-ignore lint/nursery/noProcessEnv: <explanation>
-	const { CLOUDFLARE_ACCOUNT_ID, CLOUDFLARE_D1_TOKEN } = process.env
-	if (!CLOUDFLARE_ACCOUNT_ID || !CLOUDFLARE_D1_TOKEN) {
-		throw new Error("CLOUDFLARE_ACCOUNT_ID and CLOUDFLARE_D1_TOKEN not set")
-	}
-
-	console.log("Using CLOUDFLARE_ACCOUNT_ID and CLOUDFLARE_D1_TOKEN for prod D1 credentials")
-
-	return {
-		accountId: CLOUDFLARE_ACCOUNT_ID as string,
-		databaseId: D1Config.load(bindingName).database_id as string,
-		token: CLOUDFLARE_D1_TOKEN as string,
-	}
-}
 
 export class D1Config {
 	binding: string
@@ -96,9 +38,9 @@ export class D1Config {
 		return this.preview_database_id || this.database_id
 	}
 
-	get localSqliteFile() {
+	get sqliteLocalFile() {
 		const uniqueKey = "miniflare-D1DatabaseObject" as const
-		const miniflarePath = `.wrangler/state/v3/d1/${uniqueKey}` as const
+		const miniflarePath = `.wrangler/state/v3/d1/${uniqueKey}`
 		const filename = `${miniflarePath}/${durableObjectNamespaceIdFromName(uniqueKey, this.localDatabaseId)}.sqlite`
 
 		if (!existsSync(filename)) {
@@ -107,8 +49,29 @@ export class D1Config {
 
 		return filename
 	}
-}
 
+	get sqliteLocalCredentials() {
+		return {
+			url: `file:${D1Config.load().sqliteLocalFile}`
+		}
+	}
+
+	get sqliteProxyCredentials() {
+		// biome-ignore lint/nursery/noProcessEnv: <explanation>
+		const { CLOUDFLARE_ACCOUNT_ID, CLOUDFLARE_D1_TOKEN } = process.env
+		if (!CLOUDFLARE_ACCOUNT_ID || !CLOUDFLARE_D1_TOKEN) {
+			throw new Error("CLOUDFLARE_ACCOUNT_ID and CLOUDFLARE_D1_TOKEN not set")
+		}
+
+		console.log("Using CLOUDFLARE_ACCOUNT_ID and CLOUDFLARE_D1_TOKEN to generate sqlite proxy credentials")
+
+		return {
+			accountId: CLOUDFLARE_ACCOUNT_ID as string,
+			databaseId: this.database_id as string,
+			token: CLOUDFLARE_D1_TOKEN as string,
+		}
+	}
+}
 
 function loadWranglerConfig() {
 	const configPath = "./wrangler.jsonc"
