@@ -4,9 +4,9 @@ import { type Database, withDatabase } from "../dev/script-helpers"
 
 //
 // https://orm.drizzle.team/docs/seed-overview
-//
 async function main() {
-	withDatabase(async function seedDb(db: Database) {
+	const dbTarget = process.argv.includes("--remote") ? "remote" : "local"
+	withDatabase(dbTarget, async function seedDb(db: Database) {
 		const schema = { user }
 
 		// the d1 driver doesn't like too many statements all at once, so we seed

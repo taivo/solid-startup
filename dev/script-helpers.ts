@@ -8,24 +8,11 @@ export type LocalDatabase = ReturnType<typeof getDb>
 export type RemoteDatabase = ReturnType<typeof drizzleD1Proxy>
 export type Database = LocalDatabase | RemoteDatabase
 
-export async function withLocalDb(doWerk: (db: LocalDatabase) => Promise<void>) {
-	const platform = await getPlatformProxy<Env>()
-	const db = getDb(platform.env.DB)
 
-	await doWerk(db)
-
-	await platform.dispose()
-}
-
-export async function withRemoteDb(doWerk: (db: RemoteDatabase) => Promise<void>) {
-	const db = drizzleD1Proxy(D1Config.load().sqliteProxyCredentials)
-	await doWerk(db)
-}
-
-export async function withDatabase(doWerk: (db: Database) => Promise<void>) {
-	if (process.argv.includes("--remote")) {
+export async function withDatabase(dbTarget: "local" | "remote", doWerk: (db: Database) => Promise<void>) {
+	if (dbTarget === "remote") {
 		const answer = await confirm({
-			message: "*** You are about to run this script on the production database. Are you sure?",
+			message: "*** You are about to acquire a handle to production database. Are you sure?",
 			default: false,
 		})
 		if (answer) {
@@ -37,4 +24,18 @@ export async function withDatabase(doWerk: (db: Database) => Promise<void>) {
 	} else {
 		withLocalDb(doWerk)
 	}
+}
+
+async function withLocalDb(doWerk: (db: LocalDatabase) => Promise<void>) {
+	const platform = await getPlatformProxy<Env>()
+	const db = getDb(platform.env.DB)
+
+	await doWerk(db)
+
+	await platform.dispose()
+}
+
+async function withRemoteDb(doWerk: (db: RemoteDatabase) => Promise<void>) {
+	const db = drizzleD1Proxy(D1Config.load().sqliteProxyCredentials)
+	await doWerk(db)
 }

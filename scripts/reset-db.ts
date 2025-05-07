@@ -6,7 +6,8 @@ import { withDatabase } from "../dev/script-helpers"
 // https://orm.drizzle.team/docs/seed-overview
 //
 async function main() {
-	withDatabase(async (db) => {
+	const dbTarget = process.argv.includes("--remote") ? "remote" : "local"
+	withDatabase(dbTarget, async (db) => {
 		const schema = { user }
 		await reset(db, schema)
 	})

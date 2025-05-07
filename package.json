@@ -13,7 +13,7 @@
 		"typegen": "wrangler types",
 		"db:generate": "drizzle-kit generate",
 		"db:migrate": "drizzle-kit migrate",
-		"db:migrate-prod": "wrangler d1 migrations",
+		"db:migrate-prod": "dotenvx run -- drizzle-kit migrate --config ./drizzle.config.prod.ts",
 		"db:studio": "drizzle-kit studio",
 		"db:studio-prod": "dotenvx run -- drizzle-kit studio --config ./drizzle.config.prod.ts",
 		"db:seed": "dotenvx run -- tsx scripts/seed-db.ts",
