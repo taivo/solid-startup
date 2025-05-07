@@ -1,5 +1,6 @@
 import crypto from "node:crypto"
 import { existsSync, readFileSync } from "node:fs"
+import { confirm } from '@inquirer/prompts'
 import { parse as parseJSONC } from "jsonc-parser"
 import { getPlatformProxy } from "wrangler"
 import { getDb } from "~/lib/db"
@@ -25,8 +26,13 @@ export async function withRemoteDb(doWerk: (db: RemoteDatabase) => Promise<void>
 
 export async function withDatabase(doWerk: (db: Database) => Promise<void>) {
 	if (process.argv.includes("--remote")) {
-		console.warn("Running script on remote database.")
-		withRemoteDb(doWerk)
+		const answer = await confirm({ message: '*** You are about to run this script on the production database. Are you sure?', default: false })
+		if (answer) {
+			withRemoteDb(doWerk)
+		} else {
+			console.log("Aborting...")
+			process.exit(0)
+		}
 	} else {
 		withLocalDb(doWerk)
 	}
