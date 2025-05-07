@@ -1,7 +1,7 @@
 {
 	"$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
 	"files": {
-		"ignore": ["_wip", "migrations"]
+		"ignore": ["_wip", "drizzle/migrations"]
 	},
 	"vcs": {
 		"enabled": true,

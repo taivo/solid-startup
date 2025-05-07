@@ -2,7 +2,7 @@ import { type Config, defineConfig } from "drizzle-kit"
 import { D1Config } from "./scripts/script-helpers"
 
 export const drizzleBaseConfig = {
-	out: "./migrations",
+	out: "./drizzle/migrations",
 	schema: "./src/schema",
 	dialect: "sqlite",
 } satisfies Config
