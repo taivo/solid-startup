@@ -12,12 +12,12 @@ type D1HttpResponse = {
 	success?: boolean
 }
 
-export function drizzle({ accountId, apiToken, databaseId }: { accountId: string, apiToken: string, databaseId: string }) {
+export function drizzle({ accountId, token, databaseId }: { accountId: string, token: string, databaseId: string }) {
 	async function query(json: { sql: string, params: unknown[], method: "run" | "all" | "values" | "get" }) {
 		return fetch(`https://api.cloudflare.com/client/v4/accounts/${accountId}/d1/database/${databaseId}`, {
 			method: "POST",
 			headers: {
-				Authorization: `Bearer ${apiToken}`,
+				Authorization: `Bearer ${token}`,
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify(json),

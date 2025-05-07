@@ -3,14 +3,53 @@ import { existsSync, readFileSync } from "node:fs"
 import { parse as parseJSONC } from "jsonc-parser"
 import { getPlatformProxy } from "wrangler"
 import { getDb } from "~/lib/db"
+import { drizzle as drizzleD1Proxy } from "../drizzle/d1-http"
 
-export async function withLocalDb(doWerk: (db: ReturnType<typeof getDb>) => Promise<void>) {
+export type LocalDatabase = ReturnType<typeof getDb>
+export type RemoteDatabase = ReturnType<typeof drizzleD1Proxy>
+export type Database = LocalDatabase | RemoteDatabase
+
+export async function withLocalDb(doWerk: (db: LocalDatabase) => Promise<void>) {
 	const platform = await getPlatformProxy<Env>()
 	const db = getDb(platform.env.DB)
 
 	await doWerk(db)
 
 	await platform.dispose()
+}
+
+export async function withRemoteDb(doWerk: (db: RemoteDatabase) => Promise<void>) {
+	const db = drizzleD1Proxy(getProdD1Credentials())
+	await doWerk(db)
+}
+
+export async function withDatabase(doWerk: (db: Database) => Promise<void>) {
+	if (process.argv.includes("--remote")) {
+		console.warn("Running script on remote database.")
+		withRemoteDb(doWerk)
+	} else {
+		withLocalDb(doWerk)
+	}
+}
+
+export function getProdD1Credentials(bindingName?: string) {
+	//
+	// NOTE: this is only used to run local scripts that needs to act on the
+	// remote production database. Use it sparingly.
+	// Interactions with D1 inside the deployed app do not need these credentials.
+	//
+
+	// biome-ignore lint/nursery/noProcessEnv: <explanation>
+	const { CLOUDFLARE_ACCOUNT_ID, CLOUDFLARE_D1_TOKEN } = process.env
+	if (!CLOUDFLARE_ACCOUNT_ID || !CLOUDFLARE_D1_TOKEN) {
+		throw new Error("CLOUDFLARE_ACCOUNT_ID and CLOUDFLARE_D1_TOKEN not set")
+	}
+
+	return {
+		accountId: CLOUDFLARE_ACCOUNT_ID as string,
+		databaseId: D1Config.load(bindingName).databaseId as string,
+		token: CLOUDFLARE_D1_TOKEN as string,
+	}
 }
 
 export class D1Config {
