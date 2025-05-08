@@ -3,7 +3,7 @@ import { D1Config } from "./dev/wrangler-helpers"
 
 export const drizzleBaseConfig = {
 	out: "./drizzle/migrations",
-	schema: "./src/schema",
+	schema: "./drizzle/schema",
 	dialect: "sqlite",
 } satisfies Config
 

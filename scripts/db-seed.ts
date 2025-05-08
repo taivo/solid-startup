@@ -1,6 +1,6 @@
 import { seed } from "drizzle-seed"
-import { user } from "~/schema/auth-schema"
 import { type Database, withDatabase } from "../dev/script-helpers"
+import { user } from "../drizzle/schema/auth-schema"
 
 //
 // https://orm.drizzle.team/docs/seed-overview

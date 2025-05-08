@@ -1,6 +1,6 @@
 import { reset } from "drizzle-seed"
-import { user } from "~/schema/auth-schema"
 import { withDatabase } from "../dev/script-helpers"
+import { user } from "../drizzle/schema/auth-schema"
 
 //
 // https://orm.drizzle.team/docs/seed-overview

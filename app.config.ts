@@ -1,24 +1,26 @@
 import { defineConfig } from "@solidjs/start/config"
 import tailwindcss from "@tailwindcss/vite"
-import Icons from 'unplugin-icons/vite'
-
+import Icons from "unplugin-icons/vite"
 
 export default defineConfig({
 	vite: {
-		plugins: [tailwindcss(),
-		Icons({ compiler: 'solid', autoInstall: true }),
-		],
+		plugins: [tailwindcss(), Icons({ compiler: "solid", autoInstall: true })],
 		define: {
 			// biome-ignore lint/nursery/noProcessEnv: <explanation>
 			__APP_VERSION__: JSON.stringify(process.env.npm_package_version),
-		}
+		},
+		resolve: {
+			alias: {
+				"~schema": "/drizzle/schema",
+			},
+		},
 	},
 	server: {
 		preset: "cloudflare-pages",
 		compatibilityDate: "2025-04-29",
 		rollupConfig: {
-			external: ["node:async_hooks"]
-		}
+			external: ["node:async_hooks"],
+		},
 	},
-	middleware: "./src/middleware.ts"
+	middleware: "./src/middleware.ts",
 })

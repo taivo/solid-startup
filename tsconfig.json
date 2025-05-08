@@ -14,7 +14,8 @@
 		"types": ["vinxi/types/client", "vitest/globals", "@testing-library/jest-dom", "unplugin-icons/types/solid"],
 		"isolatedModules": true,
 		"paths": {
-			"~/*": ["./src/*"]
+			"~/*": ["./src/*"],
+			"~schema/*": ["./drizzle/schema/*"],
 		}
 	}
 }
