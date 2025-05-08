@@ -12,7 +12,7 @@ export type Database = LocalDatabase | RemoteDatabase
 export async function withDatabase(dbTarget: "local" | "remote", doWerk: (db: Database) => Promise<void>) {
 	if (dbTarget === "remote") {
 		const answer = await confirm({
-			message: "*** You are about to acquire a handle to production database. Are you sure?",
+			message: "*** Acquiring a handle to the PRODUCTION DATABASE. Are you sure?",
 			default: false,
 		})
 		if (answer) {

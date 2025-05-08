@@ -22,7 +22,6 @@ export class D1Config {
 		if (!cfg) {
 			throw new Error(`Could not find wrangler config for D1 binding: [${bindingName}]`)
 		}
-
 		return new D1Config(cfg)
 	}
 
