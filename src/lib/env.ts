@@ -1,9 +1,5 @@
 import { getRequestEvent } from "solid-js/web"
 
-export const serverEnv = getServerEnv()
-
-
-// cloudflare env directions: https://ryanjc.com/blog/solidstart-cloudflare-pages/
 function getServerEnv() {
 	"use server"
 
@@ -14,13 +10,19 @@ function getServerEnv() {
 	// For this getServerEnv() function to work synchronously, we rely on middlewares to inject either
 	// getPlatformProxy() env or real cloudflare env into locals.serverEnv
 	//
-	// Having a synchronous serverEnv() makes many things simpler, including defining and exporting lib.db
+	// Having a synchronous getServerEnv() makes many things simpler, including defining and exporting lib.db
 	// synchronously.
 	const env = getRequestEvent()?.locals.serverEnv
 
 	if (!env) {
-		console.warn("* serverEnv is empty. Ignore this if you're only running 1-off scripts outside without a server")
+		console.warn(
+			"** serverEnv is empty. Ignore this if you're running 1-off scripts outside the request/response cycle"
+		)
 	}
 
 	return (env ?? {}) as Env
 }
+
+// NOTE: May 2025: for some reason vite ssr does not hoist the getServerEnv() function (at least during pnpm dev)
+// so we have to use it after it is defined
+export const serverEnv = getServerEnv()

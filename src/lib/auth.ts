@@ -15,6 +15,7 @@ const __devMockSendMagicLink: SendMagicLinkFn = async ({ email, url }, _request)
 	}
 }
 
+
 // https://www.better-auth.com/docs/installation
 export const auth = betterAuth({
 	database: drizzleAdapter(db, { provider: "sqlite", schema: { ...authSchema } }),

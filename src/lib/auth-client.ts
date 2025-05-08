@@ -50,21 +50,3 @@ export function useSignOut(redirectUrl = "/") {
 		})
 	}
 }
-
-
-//
-// export function useSignoutAction(redirectUrl = "/") {
-// 	const navigate = useNavigate()
-//
-// 	const signOutAction = action(
-// 		() => signOut(),
-// 		{
-// 			name: "signout",
-// 			onComplete() {
-// 				navigate(redirectUrl)
-// 			},
-// 		}
-// 	)
-//
-// 	return useAction(signOutAction)
-// }
