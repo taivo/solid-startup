@@ -16,7 +16,7 @@ function getServerEnv() {
 
 	if (!env) {
 		console.warn(
-			"** serverEnv is empty. Ignore this if you're running 1-off scripts outside the request/response cycle."
+			"*** serverEnv is empty. Ignore this if you're running 1-off scripts outside the request/response cycle."
 		)
 	}
 

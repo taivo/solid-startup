@@ -20,7 +20,7 @@
 			"migrations_dir": "drizzle/migrations"
 		}
 	],
-	"vars": { "TEST_VARIABLE": "test" }
+	"vars": {}
 
 	/**
 	 * Smart Placement

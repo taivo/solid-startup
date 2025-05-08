@@ -44,7 +44,7 @@ export function useSignOut(redirectUrl = "/") {
 					setTimeout(() => {
 						if (location.pathname !== redirectUrl)
 							navigate(redirectUrl)
-					}, 20)
+					}, 30)
 				},
 			},
 		})

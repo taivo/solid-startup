@@ -29,6 +29,12 @@ pnpm db:generate    # to generate migration files
 pnpm db:migrate     # this will migrate database and make sure local D1 files exist
 ```
 
+To simplify hosting this template as a demo, the magiclink hash is essentially just the email so we can
+generate it on the client side as well as skip the actual emailing. To use this for your own project,
+you must make changes to auth and not use any function in `lib/__deleteme.auth.ts` or any function/variable
+prefixed with `__dangerousDemo`
+
+
 ## Directory structure
 
 ```

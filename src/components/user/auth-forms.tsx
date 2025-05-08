@@ -4,6 +4,7 @@ import { IconSpinner } from "~/components/icons"
 import { Button } from "~/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card"
 import { Input } from "~/components/ui/input"
+import { __dangerousDemoCreateFakeMagicLink } from "~/lib/__deleteme.auth"
 import { signIn } from "~/lib/auth-client"
 import { cn } from "~/lib/utils"
 
@@ -13,19 +14,29 @@ export function LoginForm(props: ComponentProps<"div">) {
 	let formRef!: HTMLFormElement
 	const [errorMsg, setErrorMsg] = createSignal("")
 	const [successMsg, setSuccessMsg] = createSignal("")
+	const callbackURL = "/dashboard"
 
 	const signInWithMagicLink = action(
 		async (formData: FormData) => {
 			const { error } = await signIn.magicLink({
 				email: formData.get("email")?.toString() ?? "",
-				callbackURL: "/dashboard",
+				callbackURL,
 			})
 
 			if (error) {
 				setErrorMsg(error?.message ?? error.statusText)
 			} else {
 				formRef.reset()
-				setSuccessMsg(`Check ${formData.get("email")} for your magic link`)
+				// setSuccessMsg(`Check ${formData.get("email")} for your magic link.`)
+				const __dangerousDemoUrl = __dangerousDemoCreateFakeMagicLink(
+					formData.get("email")?.toString() ?? "",
+					callbackURL
+				)
+				setSuccessMsg(`Redirecting to ${__dangerousDemoUrl}`)
+
+				// setTimeout(() => {
+				// 	window.location.replace(__dangerousDemoUrl)
+				// }, 2000)
 			}
 		},
 		{
@@ -61,6 +72,10 @@ export function LoginForm(props: ComponentProps<"div">) {
 					</form>
 				</CardContent>
 			</Card>
+			<div class="text-balance text-center text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 [&_a]:hover:text-primary  ">
+				To simplify this demo, email won't actually be sent. Use any syntactically correct email address and you'll be
+				logged in.
+			</div>
 			<div class="text-balance text-center text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 [&_a]:hover:text-primary  ">
 				By continuing, you agree to our <A href="/terms">Terms of Service</A> and <A href="/privacy">Privacy Policy</A>.
 			</div>
