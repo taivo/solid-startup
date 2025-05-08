@@ -16,8 +16,7 @@
 		"db:migrate-prod": "dotenvx run -- drizzle-kit migrate --config ./drizzle.config.prod.ts",
 		"db:studio": "drizzle-kit studio",
 		"db:studio-prod": "dotenvx run -- drizzle-kit studio --config ./drizzle.config.prod.ts",
-		"db:seed": "pnpm runscript scripts/db-seed",
-		"runscript": "dotenvx run -- tsx",
+		"runscript": "dotenvx run -- tsx ./dev/script-runner",
 		"ui:add": "pnpm dlx solidui-cli@latest add",
 		"knip": "knip"
 	},

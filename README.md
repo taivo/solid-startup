@@ -1,16 +1,19 @@
 # SolidStart
 
-Everything you need to build a Solid project, powered by [`solid-start`](https://start.solidjs.com);
+Everything you need to build a Solid project, powered by [`solid-start`](https://start.solidjs.com)
 
 ## What is included in this starter template:
 
-- vitest
+- vitest + vite-plugin-doctest
 - biomejs
 - tailwindcss v4
-- cloudflare + wrangler (bindings not completely setup)
+- cloudflare + wrangler
 - solid-ui https://www.solid-ui.com/docs/introduction
-- drizzle ORM with sqlite (or cloudflare d1 but not completely setup)
+- drizzle ORM with D1 + drizzle-kit + seeding (for both local and remote)
 - better-auth (with magic link that mocks email sending via server console.log)
+- `components/icons.tsx` is meant to store icons used within the project so that project code does not have to reference icon libraries directly. This makes it easier to swap icon libraries.
+
+Basic navbar and sidebar layouts are also provided. User avatar, login, logout menus are setup.
 
 ## How to get started
 
@@ -27,21 +30,31 @@ pnpm db:generate    # to generate migration files
 pnpm db:migrate     # this will migrate database and make sure local D1 files exist
 ```
 
-Look at package.json to see available scripts other than `db:push`
+## Understand the project template
+- Look at package.json to see available pnpm scripts
+- With `pnpm runscript` you can run arbitrary typescript files locally. Just define a file under
+the `scripts` dir and export a default async function. See `scripts` dir for examples.
+- Code under `dev>` and `scripts` are only meant for running locally
+(even if they may affect remote production systems with appropriate credentials)
+- See `env.example` for relevant env vars used in scripts.
+- For app related env vars, use `.dev.vars` or `wrangler.jsonc` as that's how Cloudflare wrangler works.
 
+## Explanation for D1 and Drizzle setup.
+For deployed app, D1 setup is simple and uses `drizzle-orm/d1` with the Cloudflare D1 binding.
 
-## Developing
+For drizzle-kit, drizzle-kit's own `d1-http` driver is used for remote database access (with appropriate credentials). For local access, we detect the local sqlite file stored by miniflare and pass that to drizzle-kit. The filename determination is based on (the miniflare v3.20230918.0 release notes)[https://github.com/cloudflare/miniflare/releases/tag/v3.20230918.0]. As of May 2025, wrangler does not export this code so we copy and adapt it here.
 
-```bash
-pnpm dev
-```
+For drizzle-seed or local scripts, we create our own `d1-http` driver for remote database access. This is mostly based on [drizzle-kit's connections.ts](https://github.com/drizzle-team/drizzle-orm/blob/main/drizzle-kit/src/cli/connections.ts#L742). To work with the local database, we use wrangler's `getPlatformProxy`.
+
+Part of the complication is due to drizzle-kit having its own configuration system, and does not export its d1-http driver.
 
 
 ## Cloudflare setup resources
- - https://developers.cloudflare.com/pages/framework-guides/deploy-a-solid-start-site/
  - https://developers.cloudflare.com/pages/framework-guides/deploy-a-solid-start-site/ (has bindings info)
  - https://ryanjc.com/blog/solidstart-cloudflare-pages/
  - https://github.com/cloudflare/workers-sdk/issues/5912
  - https://github.com/solidjs/solid-start/issues/1833
  - https://github.com/cloudflare/workers-sdk/issues/4548 (understand the hash of the local D1 filename)
  - https://github.com/cloudflare/miniflare/releases/tag/v3.20230918.0 (code to generate local D1 filename)
+
+ ## Hope you find this useful!
