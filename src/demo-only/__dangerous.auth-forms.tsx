@@ -1,4 +1,4 @@
-import { A, action, useSubmission } from "@solidjs/router"
+import { action, useSubmission } from "@solidjs/router"
 import { type ComponentProps, createSignal, splitProps } from "solid-js"
 import { IconSpinner } from "~/components/icons"
 import { Button } from "~/components/ui/button"
@@ -6,8 +6,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card"
 import { Input } from "~/components/ui/input"
 import { signIn } from "~/lib/auth-client"
 import { cn } from "~/lib/utils"
+import { __dangerousCreateFakeMagicLink } from "./__dangerous.auth"
 
-export function LoginForm(props: ComponentProps<"div">) {
+export function DemoLoginForm(props: ComponentProps<"div">) {
 	const [local, rest] = splitProps(props, ["class"])
 
 	let formRef!: HTMLFormElement
@@ -27,6 +28,12 @@ export function LoginForm(props: ComponentProps<"div">) {
 			} else {
 				formRef.reset()
 				setSuccessMsg(`Check ${formData.get("email")} for your magic link.`)
+				const __dangerousDemoUrl = __dangerousCreateFakeMagicLink(formData.get("email")?.toString() ?? "", callbackURL)
+				// setSuccessMsg(`Redirecting to ${__dangerousDemoUrl}`)
+
+				// setTimeout(() => {
+				// 	window.location.replace(__dangerousDemoUrl)
+				// }, 2000)
 			}
 		},
 		{
@@ -63,7 +70,8 @@ export function LoginForm(props: ComponentProps<"div">) {
 				</CardContent>
 			</Card>
 			<div class="text-balance text-center text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 [&_a]:hover:text-primary  ">
-				By continuing, you agree to our <A href="/terms">Terms of Service</A> and <A href="/privacy">Privacy Policy</A>.
+				To simplify this demo, email won't actually be sent. Use any syntactically correct email address and you'll be
+				logged in. DO NOT USE THIS FORM FOR REAL PROJECTS
 			</div>
 		</div>
 	)

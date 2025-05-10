@@ -4,7 +4,7 @@ import { drizzleAdapter } from "better-auth/adapters/drizzle"
 import { magicLink } from "better-auth/plugins"
 import db from "~/lib/db"
 import * as authSchema from "~schema/auth-schema"
-import { __dangerousDemoMockGenerateToken, __dangerousDemoMockSendMagicLink } from "../../dev/__dangerous.auth"
+import { __dangerousMockGenerateToken, __dangerousMockSendMagicLink } from "../demo-only/__dangerous.auth"
 
 //
 // NOTE: Per better-auth docs, `src/lib/auth.ts` is one of the few locations this file can be
@@ -15,8 +15,9 @@ export const auth = betterAuth({
 	database: drizzleAdapter(db, { provider: "sqlite", schema: { ...authSchema } }),
 	plugins: [
 		magicLink({
-			sendMagicLink: __dangerousDemoMockSendMagicLink,
-			generateToken: __dangerousDemoMockGenerateToken
+			sendMagicLink: __dangerousMockSendMagicLink,
+			generateToken: __dangerousMockGenerateToken,
+			disableSignUp: true
 		}),
 	],
 })
