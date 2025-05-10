@@ -1,4 +1,7 @@
 import type { magicLink } from "better-auth/plugins"
+import { asc } from "drizzle-orm"
+import db from "~/lib/db"
+import { user } from "~schema/auth-schema"
 
 type SendMagicLinkFn = Parameters<typeof magicLink>[0]["sendMagicLink"]
 export const __dangerousDemoMockSendMagicLink: SendMagicLinkFn = async ({ email, url }, _request) => {
@@ -22,4 +25,15 @@ export function __dangerousDemoCreateFakeMagicLink(email: string, callbackUrl = 
 	const siteRoot = "http://localhost:3000"
 	const token = __dangerousDemoMockGenerateToken(email)
 	return `${siteRoot}/api/auth/magic-link/verify?token=${token}&callbackURL=${callbackUrl}`
+}
+
+export async function __dangerousDemoGetDemoUsers() {
+	const demoUsers = await db.query.user.findMany({
+		columns: { email: true },
+		orderBy: [asc(user.createdAt)],
+		limit: 3
+	})
+
+	console.log('DEMO USERS', demoUsers)
+	return demoUsers
 }

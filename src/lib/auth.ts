@@ -4,7 +4,7 @@ import { drizzleAdapter } from "better-auth/adapters/drizzle"
 import { magicLink } from "better-auth/plugins"
 import db from "~/lib/db"
 import * as authSchema from "~schema/auth-schema"
-import { __dangerousDemoMockGenerateToken, __dangerousDemoMockSendMagicLink } from "./__deleteme.auth"
+import { __dangerousDemoMockGenerateToken, __dangerousDemoMockSendMagicLink } from "../../dev/__dangerous.auth"
 
 //
 // NOTE: Per better-auth docs, `src/lib/auth.ts` is one of the few locations this file can be
