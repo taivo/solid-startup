@@ -16,7 +16,7 @@ export const auth = betterAuth({
 	user: {
 		additionalFields: {
 			theme: { type: "string" },
-			isDemo: { type: "boolean", defaultValue: false },
+			isTest: { type: "boolean", defaultValue: false },
 		},
 	},
 	plugins: [
