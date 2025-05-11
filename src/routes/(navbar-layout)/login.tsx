@@ -11,3 +11,8 @@ export default function LoginPage() {
 		</div>
 	)
 }
+
+function __dangerousGetDemoUsers() {
+	"use server"
+	
+}

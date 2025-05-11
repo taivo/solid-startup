@@ -1,6 +1,8 @@
 import { confirm } from "@inquirer/prompts"
+import { betterAuth } from "better-auth"
+import { drizzleAdapter } from "better-auth/adapters/drizzle"
 import { withLocalD1, withProxyD1 } from "~drizzle/d1-dev-helpers"
-import type { BoundD1, ProxyD1 } from "~drizzle/index"
+import { type BoundD1, type ProxyD1, authSchema } from "~drizzle/index"
 
 export type Database = BoundD1 | ProxyD1
 export async function withDatabase(dbTarget: "local" | "remote", doWerk: (db: Database) => Promise<void>) {
@@ -19,4 +21,21 @@ export async function withDatabase(dbTarget: "local" | "remote", doWerk: (db: Da
 	} else {
 		withLocalD1(doWerk)
 	}
+}
+
+export async function withDatabaseAndAuth(dbTarget: "local" | "remote", doWerk: (db: Database, authApi: AuthApi) => Promise<void>) {
+	withDatabase(dbTarget, async (db) => {
+		doWerk(db, initAuthApi(db))
+	})
+}
+
+export type AuthApi = ReturnType<typeof initAuthApi>
+export function initAuthApi(db: Database) {
+	return betterAuth({
+		database: drizzleAdapter(db, { provider: "sqlite", schema: authSchema }),
+		emailAndPassword: {
+			enabled: true,
+			requireEmailVerification: false,
+		},
+	}).api
 }

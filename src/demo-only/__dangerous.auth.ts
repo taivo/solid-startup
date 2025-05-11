@@ -1,7 +1,3 @@
-import type { magicLink } from "better-auth/plugins"
-
-
-
 export function __dangerousMockGenerateToken(email: string) {
 	// NOTE: This mock function is to simplify the project template demo only.
 	// Do not use it for your project
