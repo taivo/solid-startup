@@ -27,7 +27,7 @@ export default async function createUser(args: string[]) {
 		const pw = await password({ message: "password:", mask: true })
 		const isTest = await confirm({ message: "isTest?", default: true })
 
-		await setupUser({ name, email, password: pw, isTest }, { auth, db })
+		await setupUsers([{ name, email, password: pw, isTest }], { auth, db })
 	})
 }
 
@@ -42,18 +42,23 @@ export function initAuthForScripts(db: Database) {
 }
 
 type SetupUserData = Omit<typeof authSchema.user.$inferInsert & { password: string }, "createdAt" | "updatedAt" | "id" | "emailVerified">
-export async function setupUser({ name, email, password, ...otherFields }: SetupUserData & { password: string }, { auth, db }: {
+export async function setupUsers(uData: SetupUserData[], { auth, db }: {
 	auth: ReturnType<typeof initAuthForScripts>, db: Database
 }) {
-	const {
-		user: newUser,
-	} = await auth.api.signUpEmail({
-		body: { name, email, password },
-	})
 
-	if (otherFields) {
-		await db.update(authSchema.user).set(otherFields).where(eq(authSchema.user.id, newUser.id))
+	async function setupOneUser({ name, email, password, ...otherFields }: SetupUserData) {
+		const {
+			user: newUser,
+		} = await auth.api.signUpEmail({
+			body: { name, email, password },
+		})
+
+		if (otherFields) {
+			await db.update(authSchema.user).set(otherFields).where(eq(authSchema.user.id, newUser.id))
+		}
+
+		return { name, email, ...otherFields }
 	}
 
-	return { name, email, ...otherFields }
+	return Promise.all(uData.map(setupOneUser))
 }
