@@ -15,8 +15,6 @@ app.config.timestamp_*.js
 
 # sqlite db
 *.db
-migrations/*
-drizzle/migrations/*
 
 # dependencies
 /node_modules
