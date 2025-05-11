@@ -1,11 +1,6 @@
-import { drizzle } from "drizzle-orm/d1"
 import { serverEnv } from "~/lib/env"
-import * as authSchema from "~schema/auth-schema"
-import * as mainSchema from "~schema/schema"
+import { getD1 } from "~drizzle/index"
+export { fullSchema } from "~drizzle/index"
 
-const db = getDb(serverEnv.DB)
+const db = getD1(serverEnv.DB)
 export default db
-
-export function getDb(binding: D1Database) {
-	return drizzle(binding, { schema: { ...authSchema, ...mainSchema } })
-}

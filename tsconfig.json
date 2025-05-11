@@ -15,7 +15,7 @@
 		"isolatedModules": true,
 		"paths": {
 			"~/*": ["./src/*"],
-			"~schema/*": ["./drizzle/schema/*"],
+			"~drizzle/*": ["./drizzle/*"]
 		}
 	}
 }

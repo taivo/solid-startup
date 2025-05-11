@@ -1,6 +1,6 @@
 import { defineConfig } from "drizzle-kit"
-import { D1Config } from "./dev/wrangler-helpers"
 import { drizzleBaseConfig } from "./drizzle.config"
+import { D1Config } from "./drizzle/d1-dev-helpers/d1-config-loader"
 
 export default defineConfig({
 	...drizzleBaseConfig,

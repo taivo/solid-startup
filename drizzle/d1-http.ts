@@ -1,7 +1,16 @@
+import type { DrizzleConfig } from "drizzle-orm"
 import { drizzle as drizzleProxy } from "drizzle-orm/sqlite-proxy"
 
-export function drizzle({ accountId, token, databaseId }: { accountId: string; token: string; databaseId: string }) {
+export type D1Credentials = {
+	accountId: string
+	databaseId: string
+	token: string
+}
 
+export function drizzle<TSchema extends Record<string, unknown> = Record<string, never>>(
+	{ accountId, token, databaseId }: D1Credentials,
+	config?: DrizzleConfig<TSchema>
+) {
 	const apiRoot = "https://api.cloudflare.com/client/v4/accounts" as const
 
 	//
@@ -25,8 +34,7 @@ export function drizzle({ accountId, token, databaseId }: { accountId: string; t
 			| {
 				success: true
 				result: {
-					results:
-					// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+					results: // biome-ignore lint/suspicious/noExplicitAny: <explanation>
 					| any[]
 					| {
 						columns: string[]
@@ -50,5 +58,5 @@ export function drizzle({ accountId, token, databaseId }: { accountId: string; t
 		return { rows }
 	}
 
-	return drizzleProxy(remoteCallback)
+	return drizzleProxy(remoteCallback, config)
 }

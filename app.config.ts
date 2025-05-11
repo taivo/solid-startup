@@ -11,7 +11,7 @@ export default defineConfig({
 		},
 		resolve: {
 			alias: {
-				"~schema": "/drizzle/schema",
+				"~drizzle": "/drizzle",
 			},
 		},
 	},

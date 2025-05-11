@@ -10,7 +10,7 @@ export class D1Config {
 	migrations_dir?: string
 
 	static load(bindingName?: string) {
-		const d1_databases = loadWranglerConfig().d1_databases
+		const d1_databases = unstable_readConfig({}).d1_databases
 
 		if (d1_databases.length === 1 && !bindingName) {
 			// return the only config if no bindingName is specified
@@ -70,10 +70,6 @@ export class D1Config {
 			token: CLOUDFLARE_D1_TOKEN as string,
 		}
 	}
-}
-
-function loadWranglerConfig() {
-	return unstable_readConfig({})
 }
 
 function durableObjectNamespaceIdFromName(uniqueKey: string, name: string) {

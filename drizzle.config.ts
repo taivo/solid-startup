@@ -1,5 +1,5 @@
 import { type Config, defineConfig } from "drizzle-kit"
-import { D1Config } from "./dev/wrangler-helpers"
+import { D1Config } from "./drizzle/d1-dev-helpers/d1-config-loader"
 
 console.log("args", process.argv)
 
