@@ -9,7 +9,7 @@ export const user = sqliteTable("user", {
  createdAt: integer('created_at', { mode: 'timestamp' }).notNull(),
  updatedAt: integer('updated_at', { mode: 'timestamp' }).notNull(),
  theme: text('theme'),
- isDemo: integer('is_demo', { mode: 'boolean' })
+ isTest: integer('is_test', { mode: 'boolean' })
 				});
 
 export const session = sqliteTable("session", {
