@@ -2,15 +2,14 @@ import { eq } from "drizzle-orm"
 import { authSchema } from "~drizzle/index"
 import type { AuthApi, Database, initAuthApi } from "../dev/script-helpers"
 
-export const DEMO_USERS_DATA = [
-	{ name: "Alice", email: "alice@example.com", password: "demo-123" },
-	{ name: "Bob", email: "bob@example.com", password: "demo-123" },
-	{ name: "Charlie", email: "charlie@example.com", password: "demo-123" },
-] as const
+const DEMO_USERS_DATA = [
+	{ name: "Alice", email: "alice@example.com" },
+	{ name: "Bob", email: "bob@example.com" },
+	{ name: "Charlie", email: "charlie@example.com" }
+].map((d) => ({ ...d, password: "demo-123", isTest: true }))
 
 export async function scaffoldTestUsers(db: Database, authApi: AuthApi) {
-	const usersData = DEMO_USERS_DATA.map((d) => ({ ...d, isTest: true }))
-	return setupUsers(usersData, { authApi, db })
+	return setupUsers(DEMO_USERS_DATA, { authApi, db })
 }
 
 type SetupUserData = Omit<

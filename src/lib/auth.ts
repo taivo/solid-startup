@@ -22,7 +22,6 @@ export const logMagicLinkToServerConsole: SendMagicLinkFn = async ({ email, url 
 	}
 }
 
-
 export const auth = betterAuth({
 	database: drizzleAdapter(db, { provider: "sqlite", schema: authSchema }),
 	emailAndPassword: {
@@ -43,3 +42,20 @@ export const auth = betterAuth({
 		}),
 	],
 })
+
+export async function __demoOnlyGetDemoUserCreds() {
+	"user server"
+
+	// const demoUsers = await db.query.user.findMany({
+	// 	where: eq(authSchema.user.isTest, true),
+	// 	columns: { email: true },
+	// 	limit: 2
+	// })
+
+	// return demoUsers.map(({ email }) => ({ email, demoPW: "demo-123" }))
+	console.log("TESTING...")
+	return [
+		{ email: "test@example.com", demoPW: "demo-123" },
+		{ email: "example@test.com", demoPW: "demo-123" },
+	]
+}
