@@ -20,6 +20,7 @@ export default function MagicLinkForm(props: {
 			})
 
 			if (error) {
+				console.error("error", error)
 				props.setErrorMsg(error?.message ?? error.statusText)
 			} else {
 				formRef.reset()

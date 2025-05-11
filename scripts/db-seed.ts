@@ -1,5 +1,5 @@
 import { seed } from "drizzle-seed"
-import { exampleTable } from "~schema/schema"
+import { exampleTable } from "~drizzle/schema/main-schema"
 import { type Database, withDatabase } from "../dev/script-helpers"
 import { initAuthForScripts, setupUsers } from "./create-user"
 
@@ -20,7 +20,10 @@ export const TEST_USERS_DATA = [
 
 async function seedTestUsers(db: Database) {
 	const auth = initAuthForScripts(db)
-	return setupUsers(TEST_USERS_DATA.map((d) => ({ ...d, isTest: true })), { auth, db })
+	return setupUsers(
+		TEST_USERS_DATA.map((d) => ({ ...d, isTest: true })),
+		{ auth, db }
+	)
 }
 
 async function seedData(db: Database) {
@@ -30,8 +33,8 @@ async function seedData(db: Database) {
 	// in smaller batches. Use a controlled randSeeds array for determinism
 	//
 	await Promise.all(
-		[1, 2].map(async (randSeed) =>
-			seed(db, schema, { count: 10, seed: randSeed })
+		[1, 2].map(
+			async (randSeed) => seed(db, schema, { count: 10, seed: randSeed })
 			// .refine((f) => ({
 			// 		exampleTable: {
 			// 			columns: { content: f.default({ defaultValue: "blah blah" }) },
