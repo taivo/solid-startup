@@ -7,7 +7,9 @@ export const user = sqliteTable("user", {
  emailVerified: integer('email_verified', { mode: 'boolean' }).notNull(),
  image: text('image'),
  createdAt: integer('created_at', { mode: 'timestamp' }).notNull(),
- updatedAt: integer('updated_at', { mode: 'timestamp' }).notNull()
+ updatedAt: integer('updated_at', { mode: 'timestamp' }).notNull(),
+ theme: text('theme'),
+ isDemo: integer('is_demo', { mode: 'boolean' })
 				});
 
 export const session = sqliteTable("session", {

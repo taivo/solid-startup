@@ -17,7 +17,15 @@
 			"database_name": "solid-startup",
 			"database_id": "af1e900f-06b9-4d71-9ed7-78639cd7dc79",
 			"preview_database_id": "solid-startup-local",
-			"migrations_dir": "drizzle/migrations"
+			// NOTE: wrangler D1 migration table has a slightly different schema
+			// than drizzle migration table.
+			// D1 default table name "d1_migrations", schema: (id:int, name:text, applied_at:numeric).
+			// Drizzle default table name "__drizzle_migrations", schema: (id: numeric, hash:text, created_at: numeric)).
+			// Because of that, even if we use the same table name (__drizzle_migrations vs d1_migration),
+			// we still have a problem with the schema incompatibility.
+			//
+			"migrations_dir": "drizzle/migrations",
+			"migrations_table": "__d1_migrations"
 		}
 	],
 	"vars": {}

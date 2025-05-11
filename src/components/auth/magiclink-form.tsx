@@ -12,7 +12,7 @@ export default function MagicLinkForm(props: {
 }) {
 	let formRef!: HTMLFormElement
 
-	const signInWithMagicLink = action(
+	const signInAction = action(
 		async (formData: FormData) => {
 			const { error } = await signIn.magicLink({
 				email: formData.get("email")?.toString() ?? "",
@@ -31,10 +31,10 @@ export default function MagicLinkForm(props: {
 		}
 	)
 
-	const submission = useSubmission(signInWithMagicLink)
+	const submission = useSubmission(signInAction)
 
 	return (
-		<form action={signInWithMagicLink} method="post" ref={formRef}>
+		<form action={signInAction} method="post" ref={formRef}>
 			<div class="flex flex-col gap-6">
 				<Input name="email" type="email" placeholder="m@example.com" required />
 				<Button type="submit" class="w-full relative" disabled={submission.pending}>

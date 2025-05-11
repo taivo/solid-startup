@@ -13,6 +13,12 @@ import { __dangerousMockGenerateToken, __dangerousMockSendMagicLink } from "../d
 
 export const auth = betterAuth({
 	database: drizzleAdapter(db, { provider: "sqlite", schema: { ...authSchema } }),
+	user: {
+		additionalFields: {
+			theme: { type: "string" },
+			isDemo: { type: "boolean", defaultValue: false },
+		},
+	},
 	plugins: [
 		magicLink({
 			sendMagicLink: __dangerousMockSendMagicLink,

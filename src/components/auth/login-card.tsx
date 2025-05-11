@@ -1,6 +1,7 @@
 import { A } from "@solidjs/router"
 import { type ComponentProps, Show, createSignal, splitProps } from "solid-js"
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card"
+import type { SignInError } from "~/lib/auth-client"
 import { cn } from "~/lib/utils"
 import EmailPasswordForm from "./emailpassword-form"
 import MagicLinkForm from "./magiclink-form"

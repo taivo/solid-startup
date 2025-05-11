@@ -50,3 +50,10 @@ export function useSignOut(redirectUrl = "/") {
 		})
 	}
 }
+
+export type SignInError = {
+	code?: string
+	message?: string
+	status: number
+	statusText: string
+} | null

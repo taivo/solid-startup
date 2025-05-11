@@ -89,6 +89,11 @@ For drizzle-seed or local scripts, we create our own `d1-http` driver for remote
 
 Part of the complication is due to drizzle-kit having its own configuration system, and does not export its d1-http driver.
 
+Finally, a note on migrations. Although we have a choice between `drizzle-kit migrate` and `wrangler d1 migrations apply`, we cannot
+mix and match. Schema for the table that tracks migrations is different for each platform. Drizzle: `(id: numeric, hash:text, created_at: numeric)`. D1: `(id:int, name:text, applied_at:numeric)`. For this template, we use wrangler's approach because it has a bit better
+DX. It doesn't require obtaining accountId or d1ApiToken (you do need to login to wrangler). This means you don't need to create
+a D1 api token unless you use drizzle-studio. Also, migration name entries are more legible (although probably not as secure as hashes)
+
 
 ## Cloudflare setup resources
  - https://developers.cloudflare.com/pages/framework-guides/deploy-a-solid-start-site/ (has bindings info)
