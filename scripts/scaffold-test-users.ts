@@ -12,3 +12,5 @@ export default async function dbSeed(args: string[]) {
 		}
 	})
 }
+
+/////https://github.com/leonlarsson/leon-home/blob/main/app.config.ts
