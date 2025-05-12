@@ -21,8 +21,8 @@ importers:
         specifier: ^0.15.3
         version: 0.15.3(solid-js@1.9.6)
       '@solidjs/start':
-        specifier: ^1.1.3
-        version: 1.1.3(@testing-library/jest-dom@6.6.3)(@types/node@22.15.17)(jiti@2.4.2)(lightningcss@1.29.2)(solid-js@1.9.6)(terser@5.39.0)(tsx@4.19.3)(vinxi@0.5.6(@libsql/client@0.15.5)(@netlify/blobs@8.2.0)(@types/node@22.15.17)(db0@0.3.2(@libsql/client@0.15.5)(drizzle-orm@0.43.1(@libsql/client@0.15.5)(gel@2.0.2)(kysely@0.27.6)))(drizzle-orm@0.43.1(@libsql/client@0.15.5)(gel@2.0.2)(kysely@0.27.6))(ioredis@5.6.1)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(tsx@4.19.3))(vite@6.3.5(@types/node@22.15.17)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(tsx@4.19.3))
+        specifier: ^1.1.4
+        version: 1.1.4(@testing-library/jest-dom@6.6.3)(@types/node@22.15.17)(jiti@2.4.2)(lightningcss@1.29.2)(solid-js@1.9.6)(terser@5.39.0)(tsx@4.19.3)(vinxi@0.5.6(@libsql/client@0.15.5)(@netlify/blobs@8.2.0)(@types/node@22.15.17)(db0@0.3.2(@libsql/client@0.15.5)(drizzle-orm@0.43.1(@libsql/client@0.15.5)(gel@2.0.2)(kysely@0.27.6)))(drizzle-orm@0.43.1(@libsql/client@0.15.5)(gel@2.0.2)(kysely@0.27.6))(ioredis@5.6.1)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(tsx@4.19.3))(vite@6.3.5(@types/node@22.15.17)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(tsx@4.19.3))
       better-auth:
         specifier: ^1.2.7
         version: 1.2.7
@@ -39,8 +39,8 @@ importers:
         specifier: ^4.17.21
         version: 4.17.21
       tailwind-merge:
-        specifier: ^3.2.0
-        version: 3.2.0
+        specifier: ^3.3.0
+        version: 3.3.0
       tw-animate-css:
         specifier: ^1.2.9
         version: 1.2.9
@@ -55,11 +55,11 @@ importers:
         specifier: ^1.9.4
         version: 1.9.4
       '@dotenvx/dotenvx':
-        specifier: ^1.43.0
-        version: 1.43.0
+        specifier: ^1.44.0
+        version: 1.44.0
       '@iconify-json/lucide':
-        specifier: ^1.2.41
-        version: 1.2.41
+        specifier: ^1.2.42
+        version: 1.2.42
       '@iconify-json/tabler':
         specifier: ^1.2.17
         version: 1.2.17
@@ -398,8 +398,8 @@ packages:
     resolution: {integrity: sha512-KrkT6qO5NxqNfy68sBl6CTSoJ4SNDIS5iQArkibhlbGU4LaDukZ3q2HIkh8aUKDio6o4itU4xDR7t82Y2eP1Bg==}
     engines: {node: '>=14'}
 
-  '@dotenvx/dotenvx@1.43.0':
-    resolution: {integrity: sha512-Z8XjM75aWZ/ekUzBjlr/OqQsLWtJY4nVtruxopAt+FlYHfY0/gKl85nD16aEqbTkU53kJcm5psID0L2/sQMmuw==}
+  '@dotenvx/dotenvx@1.44.0':
+    resolution: {integrity: sha512-18Aa+7KP/L2Kj9lxmT4EJZnsCq/xGIHgzU26rdzsKMhjpeT3YY+qin/dNAnIaVHPZnee7kXpZL55M9htd30r7Q==}
     hasBin: true
 
   '@drizzle-team/brocli@0.10.2':
@@ -873,8 +873,8 @@ packages:
   '@hexagon/base64@1.1.28':
     resolution: {integrity: sha512-lhqDEAvWixy3bZ+UOYbPwUbBkwBq5C1LAJ/xPC8Oi+lL54oyakv/npbA0aU2hgCsx/1NUd4IBvV03+aUBWxerw==}
 
-  '@iconify-json/lucide@1.2.41':
-    resolution: {integrity: sha512-rOOahfHMgWPqLyRLvLSqEwCmS4jEDxB1Pk63QTe0GObLBKgYKlPmuc1zKYzSuPPkLX/ND7rScVOIDb//ggMNzg==}
+  '@iconify-json/lucide@1.2.42':
+    resolution: {integrity: sha512-exkRygF4yd6e5q966TXJQc/b+MAu3iQb8LeExCjl2JoP4/RlpudkYpg1AIZVCVCjAiElDYmVJYDWiJXPLkFN/g==}
 
   '@iconify-json/tabler@1.2.17':
     resolution: {integrity: sha512-Jfk20IC/n7UOQQSXM600BUhAwEfg8KU1dNUF+kg4eRhbET5w1Ktyax7CDx8Z8y0H6+J/8//AXpJOEgG8YoP8rw==}
@@ -1709,8 +1709,8 @@ packages:
     peerDependencies:
       solid-js: ^1.8.6
 
-  '@solidjs/start@1.1.3':
-    resolution: {integrity: sha512-JjBQDk+5xIRVgAdh3A5/caWq1g2LaVh41mQTcl7ACKfmnYRkHkvGezV4XnckTBxXkmFYkXKxwCWavguPA0JE5g==}
+  '@solidjs/start@1.1.4':
+    resolution: {integrity: sha512-ma1TBYqoTju87tkqrHExMReM5Z/+DTXSmi30CCTavtwuR73Bsn4rVGqm528p4sL2koRMfAuBMkrhuttjzhL68g==}
     peerDependencies:
       vinxi: ^0.5.3
 
@@ -2775,8 +2775,8 @@ packages:
   ee-first@1.1.1:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
 
-  electron-to-chromium@1.5.151:
-    resolution: {integrity: sha512-Rl6uugut2l9sLojjS4H4SAr3A4IgACMLgpuEMPYCVcKydzfyPrn5absNRju38IhQOf/NwjJY8OGWjlteqYeBCA==}
+  electron-to-chromium@1.5.152:
+    resolution: {integrity: sha512-xBOfg/EBaIlVsHipHl2VdTPJRSvErNUaqW8ejTq5OlOlIYx1wOllCHsAvAIrr55jD1IYEfdR86miUEt8H5IeJg==}
 
   emoji-regex-xs@1.0.0:
     resolution: {integrity: sha512-LRlerrMYoIDrT6jgpeZ2YYl/L8EulRTt5hQcYjy5AInh7HWXKimpqx68aknBFpGL2+/IcogTcaydJEgaTmOpDg==}
@@ -4293,8 +4293,8 @@ packages:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
     hasBin: true
 
-  semver@7.7.1:
-    resolution: {integrity: sha512-hlq8tAfn0m/61p4BVRcPzIGr6LKiMwo4VM6dGi6pt4qcRkmNzTcWq6eCEjEh+qXjkMDvPlOFFSGwQjoEa6gyMA==}
+  semver@7.7.2:
+    resolution: {integrity: sha512-RF0Fw+rO5AMf9MAyaRXI4AV0Ulj5lMHqVxxdSgiVbixSCXoEmmX/jk0CuJw4+3SqroYO9VoUh+HcuJivvtJemA==}
     engines: {node: '>=10'}
     hasBin: true
 
@@ -4556,8 +4556,8 @@ packages:
     resolution: {integrity: sha512-ulAk51I9UVUyJgxlv9M6lFot2WP3e7t8Kz9+IS6D4rVba1tR9kON+Ey69f+1R4Q8cd45Lod6a4IcJIxnzGc/zA==}
     engines: {node: '>=18'}
 
-  tailwind-merge@3.2.0:
-    resolution: {integrity: sha512-FQT/OVqCD+7edmmJpsgCsY820RTD5AkBryuG5IUqR5YQZSdj5xlH5nLgH7YPths7WsLPSpSBNneJdM8aS8aeFA==}
+  tailwind-merge@3.3.0:
+    resolution: {integrity: sha512-fyW/pEfcQSiigd5SNn0nApUOxx0zB/dm6UDU/rEwc2c3sX2smWUNbapHv+QRqLGVp9GWX3THIa7MUGPo+YkDzQ==}
 
   tailwindcss@4.1.6:
     resolution: {integrity: sha512-j0cGLTreM6u4OWzBeLBpycK0WIh8w7kSwcUsQZoGLHZ7xDTdM69lN64AgoIEEwFi0tnhs4wSykUa5YWxAzgFYg==}
@@ -4748,6 +4748,9 @@ packages:
   unenv@2.0.0-rc.15:
     resolution: {integrity: sha512-J/rEIZU8w6FOfLNz/hNKsnY+fFHWnu9MH4yRbSZF3xbbGHovcetXPs7sD+9p8L6CeNC//I9bhRYAOsBt2u7/OA==}
 
+  unenv@2.0.0-rc.17:
+    resolution: {integrity: sha512-B06u0wXkEd+o5gOCMl/ZHl5cfpYbDZKAT+HWTL+Hws6jWu7dCiqBBXXXzMFcFVJb8D4ytAnYmxJA83uwOQRSsg==}
+
   unicorn-magic@0.1.0:
     resolution: {integrity: sha512-lRfVq8fE8gz6QMBuDM6a+LO3IAzTi05H6gCVaUpir2E1Rwpo4ZUog45KpNXKC/Mn3Yb9UDuHumeFTo9iV/D9FQ==}
     engines: {node: '>=18'}
@@ -4810,8 +4813,8 @@ packages:
     resolution: {integrity: sha512-4/u/j4FrCKdi17jaxuJA0jClGxB1AvU2hw/IuayPc4ay1XGaJs/rbb4v5WKwAjNifjmXK9PIFyuPiaK8azyR9w==}
     engines: {node: '>=14.0.0'}
 
-  unplugin@2.3.2:
-    resolution: {integrity: sha512-3n7YA46rROb3zSj8fFxtxC/PqoyvYQ0llwz9wtUPUutr9ig09C8gGo5CWCwHrUzlqC1LLR43kxp5vEIyH1ac1w==}
+  unplugin@2.3.3:
+    resolution: {integrity: sha512-DN4DgiS13HFrAapoRmmoa9B35QzmQVRH2k58HelO28htXVNEEFZ8CGlZL0aRHXOXtz9McwY6lqaZjcc15uWMow==}
     engines: {node: '>=18.12.0'}
 
   unstorage@1.16.0:
@@ -5532,7 +5535,7 @@ snapshots:
       gonzales-pe: 4.3.0
       node-source-walk: 6.0.2
 
-  '@dotenvx/dotenvx@1.43.0':
+  '@dotenvx/dotenvx@1.44.0':
     dependencies:
       commander: 11.1.0
       dotenv: 16.5.0
@@ -5798,7 +5801,7 @@ snapshots:
 
   '@hexagon/base64@1.1.28': {}
 
-  '@iconify-json/lucide@1.2.41':
+  '@iconify-json/lucide@1.2.42':
     dependencies:
       '@iconify/types': 2.0.0
 
@@ -6162,7 +6165,7 @@ snapshots:
       nopt: 5.0.0
       npmlog: 5.0.1
       rimraf: 3.0.2
-      semver: 7.7.1
+      semver: 7.7.2
       tar: 6.2.1
     transitivePeerDependencies:
       - encoding
@@ -6175,7 +6178,7 @@ snapshots:
       https-proxy-agent: 7.0.6
       node-fetch: 2.7.0
       nopt: 8.1.0
-      semver: 7.7.1
+      semver: 7.7.2
       tar: 7.4.3
     transitivePeerDependencies:
       - encoding
@@ -6261,7 +6264,7 @@ snapshots:
       precinct: 11.0.5
       require-package-name: 2.0.1
       resolve: 2.0.0-next.5
-      semver: 7.7.1
+      semver: 7.7.2
       tmp-promise: 3.0.3
       toml: 3.0.0
       unixify: 1.0.0
@@ -6659,7 +6662,7 @@ snapshots:
     dependencies:
       solid-js: 1.9.6
 
-  '@solidjs/start@1.1.3(@testing-library/jest-dom@6.6.3)(@types/node@22.15.17)(jiti@2.4.2)(lightningcss@1.29.2)(solid-js@1.9.6)(terser@5.39.0)(tsx@4.19.3)(vinxi@0.5.6(@libsql/client@0.15.5)(@netlify/blobs@8.2.0)(@types/node@22.15.17)(db0@0.3.2(@libsql/client@0.15.5)(drizzle-orm@0.43.1(@libsql/client@0.15.5)(gel@2.0.2)(kysely@0.27.6)))(drizzle-orm@0.43.1(@libsql/client@0.15.5)(gel@2.0.2)(kysely@0.27.6))(ioredis@5.6.1)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(tsx@4.19.3))(vite@6.3.5(@types/node@22.15.17)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(tsx@4.19.3))':
+  '@solidjs/start@1.1.4(@testing-library/jest-dom@6.6.3)(@types/node@22.15.17)(jiti@2.4.2)(lightningcss@1.29.2)(solid-js@1.9.6)(terser@5.39.0)(tsx@4.19.3)(vinxi@0.5.6(@libsql/client@0.15.5)(@netlify/blobs@8.2.0)(@types/node@22.15.17)(db0@0.3.2(@libsql/client@0.15.5)(drizzle-orm@0.43.1(@libsql/client@0.15.5)(gel@2.0.2)(kysely@0.27.6)))(drizzle-orm@0.43.1(@libsql/client@0.15.5)(gel@2.0.2)(kysely@0.27.6))(ioredis@5.6.1)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(tsx@4.19.3))(vite@6.3.5(@types/node@22.15.17)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(tsx@4.19.3))':
     dependencies:
       '@tanstack/server-functions-plugin': 1.119.2(@types/node@22.15.17)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(tsx@4.19.3)
       '@vinxi/plugin-directives': 0.5.1(vinxi@0.5.6(@libsql/client@0.15.5)(@netlify/blobs@8.2.0)(@types/node@22.15.17)(db0@0.3.2(@libsql/client@0.15.5)(drizzle-orm@0.43.1(@libsql/client@0.15.5)(gel@2.0.2)(kysely@0.27.6)))(drizzle-orm@0.43.1(@libsql/client@0.15.5)(gel@2.0.2)(kysely@0.27.6))(ioredis@5.6.1)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(tsx@4.19.3))
@@ -6942,7 +6945,7 @@ snapshots:
       debug: 4.4.0
       globby: 11.1.0
       is-glob: 4.0.3
-      semver: 7.7.1
+      semver: 7.7.2
       tsutils: 3.21.0(typescript@5.8.3)
     optionalDependencies:
       typescript: 5.8.3
@@ -7373,7 +7376,7 @@ snapshots:
   browserslist@4.24.5:
     dependencies:
       caniuse-lite: 1.0.30001717
-      electron-to-chromium: 1.5.151
+      electron-to-chromium: 1.5.152
       node-releases: 2.0.19
       update-browserslist-db: 1.1.3(browserslist@4.24.5)
 
@@ -7789,7 +7792,7 @@ snapshots:
 
   ee-first@1.1.1: {}
 
-  electron-to-chromium@1.5.151: {}
+  electron-to-chromium@1.5.152: {}
 
   emoji-regex-xs@1.0.0: {}
 
@@ -8125,7 +8128,7 @@ snapshots:
       '@petamoriken/float16': 3.9.2
       debug: 4.4.0
       env-paths: 3.0.0
-      semver: 7.7.1
+      semver: 7.7.2
       shell-quote: 1.8.2
       which: 4.0.0
     transitivePeerDependencies:
@@ -8947,7 +8950,7 @@ snapshots:
       rollup: 4.40.2
       rollup-plugin-visualizer: 5.14.0(rollup@4.40.2)
       scule: 1.3.0
-      semver: 7.7.1
+      semver: 7.7.2
       serve-placeholder: 2.0.2
       serve-static: 2.2.0
       source-map: 0.7.4
@@ -8956,7 +8959,7 @@ snapshots:
       ultrahtml: 1.6.0
       uncrypto: 0.1.3
       unctx: 2.4.1
-      unenv: 2.0.0-rc.15
+      unenv: 2.0.0-rc.17
       unimport: 5.0.1
       unplugin-utils: 0.2.4
       unstorage: 1.16.0(@netlify/blobs@8.2.0)(db0@0.3.2(@libsql/client@0.15.5)(drizzle-orm@0.43.1(@libsql/client@0.15.5)(gel@2.0.2)(kysely@0.27.6)))(ioredis@5.6.1)
@@ -9030,7 +9033,7 @@ snapshots:
   normalize-package-data@6.0.2:
     dependencies:
       hosted-git-info: 7.0.2
-      semver: 7.7.1
+      semver: 7.7.2
       validate-npm-package-license: 3.0.4
 
   normalize-path@2.1.1:
@@ -9452,7 +9455,7 @@ snapshots:
 
   semver@6.3.1: {}
 
-  semver@7.7.1: {}
+  semver@7.7.2: {}
 
   send@0.19.0:
     dependencies:
@@ -9530,7 +9533,7 @@ snapshots:
     dependencies:
       color: 4.2.3
       detect-libc: 2.0.4
-      semver: 7.7.1
+      semver: 7.7.2
     optionalDependencies:
       '@img/sharp-darwin-arm64': 0.33.5
       '@img/sharp-darwin-x64': 0.33.5
@@ -9772,7 +9775,7 @@ snapshots:
 
   system-architecture@0.1.0: {}
 
-  tailwind-merge@3.2.0: {}
+  tailwind-merge@3.3.0: {}
 
   tailwindcss@4.1.6: {}
 
@@ -9927,7 +9930,7 @@ snapshots:
       acorn: 8.14.1
       estree-walker: 3.0.3
       magic-string: 0.30.17
-      unplugin: 2.3.2
+      unplugin: 2.3.3
 
   undici-types@5.28.4: {}
 
@@ -9953,6 +9956,14 @@ snapshots:
       pathe: 2.0.3
       ufo: 1.6.1
 
+  unenv@2.0.0-rc.17:
+    dependencies:
+      defu: 6.1.4
+      exsolve: 1.0.5
+      ohash: 2.0.11
+      pathe: 2.0.3
+      ufo: 1.6.1
+
   unicorn-magic@0.1.0: {}
 
   unicorn-magic@0.3.0: {}
@@ -9971,7 +9982,7 @@ snapshots:
       scule: 1.3.0
       strip-literal: 3.0.0
       tinyglobby: 0.2.13
-      unplugin: 2.3.2
+      unplugin: 2.3.3
       unplugin-utils: 0.2.4
 
   unist-util-is@6.0.0:
@@ -10007,7 +10018,7 @@ snapshots:
       '@iconify/utils': 2.3.0
       debug: 4.4.0
       local-pkg: 1.1.1
-      unplugin: 2.3.2
+      unplugin: 2.3.3
     transitivePeerDependencies:
       - supports-color
 
@@ -10021,7 +10032,7 @@ snapshots:
       acorn: 8.14.1
       webpack-virtual-modules: 0.6.2
 
-  unplugin@2.3.2:
+  unplugin@2.3.3:
     dependencies:
       acorn: 8.14.1
       picomatch: 4.0.2
