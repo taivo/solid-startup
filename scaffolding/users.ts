@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm"
 import { authSchema } from "~drizzle/index"
-import type { AuthForScripts, Database } from "../dev/script-helpers"
+import type { AuthApi, Database } from "../dev/script-helpers"
 
 const DEMO_USERS_DATA = [
 	{ name: "Alice", email: "alice@example.com" },
@@ -8,8 +8,8 @@ const DEMO_USERS_DATA = [
 	{ name: "Charlie", email: "charlie@example.com" },
 ].map((d) => ({ ...d, password: "demo-123", isTest: true }))
 
-export async function scaffoldTestUsers(db: Database, auth: AuthForScripts) {
-	return setupUsers(DEMO_USERS_DATA, { auth, db })
+export async function scaffoldTestUsers(db: Database, authApi: AuthApi) {
+	return setupUsers(DEMO_USERS_DATA, { authApi, db })
 }
 
 type SetupUserData = Omit<
@@ -19,15 +19,15 @@ type SetupUserData = Omit<
 export async function setupUsers(
 	uData: SetupUserData[],
 	{
-		auth,
+		authApi,
 		db,
 	}: {
-		auth: AuthForScripts
+		authApi: AuthApi
 		db: Database
 	}
 ) {
 	async function setupOneUser({ name, email, password, ...otherFields }: SetupUserData) {
-		const { user: newUser } = await auth.api.signUpEmail({
+		const { user: newUser } = await authApi.signUpEmail({
 			body: { name, email, password }
 		})
 

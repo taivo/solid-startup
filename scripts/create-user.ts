@@ -1,6 +1,6 @@
 import { confirm, input, password } from "@inquirer/prompts"
 import { z } from "zod"
-import { initAuthForScripts, withDatabase } from "../dev/script-helpers"
+import { initAuthApi, withDatabase } from "../dev/script-helpers"
 import { setupUsers } from "../scaffolding/users"
 
 export default async function createUser(args: string[]) {
@@ -16,8 +16,8 @@ export default async function createUser(args: string[]) {
 		const pw = await password({ message: "password:", mask: true })
 		const isTest = await confirm({ message: "isTest?", default: true })
 
-		const auth = initAuthForScripts(db)
+		const authApi = initAuthApi(db)
 
-		await setupUsers([{ name, email, password: pw, isTest }], { auth, db })
+		await setupUsers([{ name, email, password: pw, isTest }], { authApi, db })
 	})
 }

@@ -23,14 +23,13 @@ export async function withDatabase(dbTarget: "local" | "remote", doWerk: (db: Da
 	}
 }
 
-export type AuthForScripts = ReturnType<typeof initAuthForScripts>
-export function initAuthForScripts(db: Database) {
-	console.log("initAuthForScripts")
+export type AuthApi = ReturnType<typeof initAuthApi>
+export function initAuthApi(db: Database) {
 	return betterAuth({
 		database: drizzleAdapter(db, { provider: "sqlite", schema: authSchema }),
 		emailAndPassword: {
 			enabled: true,
 			requireEmailVerification: false,
 		},
-	})
+	}).api
 }
