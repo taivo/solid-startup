@@ -1,15 +1,15 @@
 import { eq } from "drizzle-orm"
 import { authSchema } from "~drizzle/index"
-import type { AuthApi, Database, initAuthApi } from "../dev/script-helpers"
+import type { AuthForScripts, Database } from "../dev/script-helpers"
 
 const DEMO_USERS_DATA = [
 	{ name: "Alice", email: "alice@example.com" },
 	{ name: "Bob", email: "bob@example.com" },
-	{ name: "Charlie", email: "charlie@example.com" }
+	{ name: "Charlie", email: "charlie@example.com" },
 ].map((d) => ({ ...d, password: "demo-123", isTest: true }))
 
-export async function scaffoldTestUsers(db: Database, authApi: AuthApi) {
-	return setupUsers(DEMO_USERS_DATA, { authApi, db })
+export async function scaffoldTestUsers(db: Database, auth: AuthForScripts) {
+	return setupUsers(DEMO_USERS_DATA, { auth, db })
 }
 
 type SetupUserData = Omit<
@@ -19,16 +19,16 @@ type SetupUserData = Omit<
 export async function setupUsers(
 	uData: SetupUserData[],
 	{
-		authApi,
+		auth,
 		db,
 	}: {
-		authApi: ReturnType<typeof initAuthApi>
+		auth: AuthForScripts
 		db: Database
 	}
 ) {
 	async function setupOneUser({ name, email, password, ...otherFields }: SetupUserData) {
-		const { user: newUser } = await authApi.signUpEmail({
-			body: { name, email, password },
+		const { user: newUser } = await auth.api.signUpEmail({
+			body: { name, email, password }
 		})
 
 		if (otherFields) {
