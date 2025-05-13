@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm"
 import { authSchema } from "~drizzle/index"
-import type { AuthApi, Database } from "../dev/script-helpers"
+import type { AuthApi, Database } from "../../dev/script-helpers"
 
 const DEMO_USERS_DATA = [
 	{ name: "Alice", email: "alice@example.com" },

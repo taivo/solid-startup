@@ -1,5 +1,5 @@
 import { type Database, initAuthApi, withDatabase } from "../dev/script-helpers"
-import { scaffoldTestUsers } from "../scaffolding/users"
+import { scaffoldTestUsers } from "./scaffolding/users"
 
 //
 // https://orm.drizzle.team/docs/seed-overview
