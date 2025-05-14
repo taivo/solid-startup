@@ -2,7 +2,7 @@
 import { A } from "@solidjs/router"
 import { type ComponentProps, For, Show } from "solid-js"
 import { IconChevronRight } from "~/components/icons"
-import SmartLink from "~/components/molecules/smart-link"
+import SmartLink from "~/components/ui/smart-link"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "~/components/ui/collapsible"
 import {
 	SidebarGroup,

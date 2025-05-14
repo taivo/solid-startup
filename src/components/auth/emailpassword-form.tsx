@@ -1,9 +1,9 @@
 import { action, useSubmission } from "@solidjs/router"
 import type { Setter } from "solid-js"
 import { signIn } from "~/lib/auth-client"
-import Spinner from "../molecules/spinner"
 import { Button } from "../ui/button"
 import { Input } from "../ui/input"
+import Spinner from "../ui/spinner"
 
 export default function EmailPasswordForm(props: {
 	callbackUrl: string
