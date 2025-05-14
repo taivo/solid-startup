@@ -12,9 +12,6 @@ import db, { authSchema } from "~/lib/db"
 type SendMagicLinkFn = Parameters<typeof magicLink>[0]["sendMagicLink"]
 export const logMagicLinkToServerConsole: SendMagicLinkFn = async ({ email, url }, _request) => {
 	"use server"
-	// NOTE: This mock function is to simplify the project template demo only.
-	// Do not use it for your project
-	//
 	if (import.meta.env.DEV) {
 		console.warn("Logging to console for testing/dev only. Do not use in real project.", email, url)
 	} else {
@@ -42,20 +39,3 @@ export const auth = betterAuth({
 		}),
 	],
 })
-
-export async function __demoOnlyGetDemoUserCreds() {
-	"user server"
-
-	// const demoUsers = await db.query.user.findMany({
-	// 	where: eq(authSchema.user.isTest, true),
-	// 	columns: { email: true },
-	// 	limit: 2
-	// })
-
-	// return demoUsers.map(({ email }) => ({ email, demoPW: "demo-123" }))
-	console.log("TESTING...")
-	return [
-		{ email: "test@example.com", demoPW: "demo-123" },
-		{ email: "example@test.com", demoPW: "demo-123" },
-	]
-}
