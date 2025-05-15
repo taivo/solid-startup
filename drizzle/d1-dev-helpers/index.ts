@@ -1,23 +1,25 @@
+import { drizzle as drizzleD1 } from "drizzle-orm/d1"
 import { getPlatformProxy } from "wrangler"
-import { type BoundD1, type ProxyD1, getD1, getProxyD1 } from ".."
 import { D1Config } from "./d1-config-loader"
+import { drizzle as drizzleD1Proxy } from "./d1-proxy"
+
+export type BoundD1 = ReturnType<typeof drizzleD1>
+export type ProxyD1 = ReturnType<typeof drizzleD1Proxy>
 
 export async function withLocalD1(doWerk: (db: BoundD1) => Promise<void>) {
 	const platform = await getPlatformProxy<Env>()
-	const db = getD1(platform.env.DB)
+	const db = drizzleD1(platform.env.DB)
 
 	await doWerk(db)
 
 	await platform.dispose()
 }
 
-export async function withProxyD1({
-	accountId,
-	token,
-	databaseId }: { accountId: string, token: string, databaseId: string },
-	doWerk: (db: ProxyD1) => Promise<void>) {
-
-	const db = getProxyD1({ accountId, token, databaseId })
+export async function withProxyD1(
+	{ accountId, token, databaseId }: { accountId: string; token: string; databaseId: string },
+	doWerk: (db: ProxyD1) => Promise<void>
+) {
+	const db = drizzleD1Proxy({ accountId, token, databaseId })
 	await doWerk(db)
 }
 
@@ -34,6 +36,6 @@ export function getD1ProxyCredentials(accountId: string, token: string) {
 	return {
 		accountId,
 		token,
-		databaseId: D1Config.load().databaseId
+		databaseId: D1Config.load().databaseId,
 	}
 }
