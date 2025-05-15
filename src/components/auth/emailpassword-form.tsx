@@ -1,4 +1,4 @@
-import { action, useSubmission } from "@solidjs/router"
+import { action, useNavigate, useSubmission } from "@solidjs/router"
 import type { Setter } from "solid-js"
 import { signIn } from "~/lib/auth-client"
 import { Button } from "../ui/button"
@@ -12,12 +12,19 @@ export default function EmailPasswordForm(props: {
 }) {
 	let formRef!: HTMLFormElement
 
+	const navigate = useNavigate()
+
 	const signInAction = action(
 		async (formData: FormData) => {
 			const { error } = await signIn.email({
 				email: formData.get("email")?.toString() ?? "",
 				password: formData.get("password")?.toString() ?? "",
-				callbackURL: props.callbackUrl,
+				fetchOptions: {
+					onSuccess() {
+						// email signin's callbackURL doesn't work, so we navigate manually
+						navigate(props.callbackUrl)
+					},
+				},
 			})
 
 			if (error) {
