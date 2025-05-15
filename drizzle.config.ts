@@ -1,14 +1,24 @@
-import { type Config, defineConfig } from "drizzle-kit"
+import { defineConfig } from "drizzle-kit"
 import { D1Config } from "./drizzle/d1-dev-helpers/d1-config-loader"
 
-
-export const drizzleBaseConfig = {
+export default defineConfig({
 	out: "./drizzle/migrations",
 	schema: "./drizzle/schema",
 	dialect: "sqlite",
-} satisfies Config
-
-export default defineConfig({
-	...drizzleBaseConfig,
-	dbCredentials: D1Config.load().sqliteLocalCredentials,
+	...getEnvConfig(),
 })
+
+function getEnvConfig() {
+	const d1Config = D1Config.load()
+	if (["remote", "production"].includes(process.env.NODE_ENV)) {
+		return {
+			driver: "d1-http",
+			dbCredentials: d1Config.sqliteProxyCredentials,
+		}
+	}
+
+	// else dev/local
+	return {
+		dbCredentials: d1Config.sqliteLocalCredentials,
+	}
+}

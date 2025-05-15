@@ -14,7 +14,7 @@
 		"db:generate": "drizzle-kit generate",
 		"db:migrate": "wrangler d1 migrations apply DB",
 		"db:studio": "drizzle-kit studio",
-		"db:studio-prod": "dotenvx run -- drizzle-kit studio --config ./drizzle.config.prod.ts",
+		"db:studio-prod": "NODE_ENV=production dotenvx run -- drizzle-kit studio",
 		"auth:generate-schema": "pnpx @better-auth/cli generate --output ./drizzle/schema/auth-schema.ts",
 		"ui:add": "pnpx solidui-cli@latest add",
 		"runscript": "dotenvx run -- tsx ./dev/script-runner",

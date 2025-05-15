@@ -29,7 +29,7 @@ class D1Proxy {
 	#cf: Cloudflare
 	#accountId: string
 
-	constructor({ accountId, apiToken }: { accountId: string; apiToken?: string }) {
+	constructor({ accountId, apiToken }: { accountId: string; apiToken: string }) {
 		this.#cf = new Cloudflare({ apiToken })
 		this.#accountId = accountId
 	}
