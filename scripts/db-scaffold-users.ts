@@ -9,7 +9,7 @@ export default async function dbSeed(args: string[]) {
 		const authApi = initAuthApi(db)
 		const users = await scaffoldTestUsers(db, authApi)
 		for (const u of users) {
-			console.log("setup user: ", u)
+			console.log("Completed user:", u)
 		}
 	})
 }

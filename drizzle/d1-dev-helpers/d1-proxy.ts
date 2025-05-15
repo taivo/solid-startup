@@ -15,14 +15,14 @@ export function drizzle<TSchema extends Record<string, unknown> = Record<string,
 ) {
 	const d1Proxy = new D1Proxy({ accountId, apiToken: token })
 
-	const remoteCallback: Parameters<typeof drizzleProxy>[0] = async (sql, params, method) => {
-		console.log("METHOD:", method, "SQL:", sql, "  | PARAMS:", params)
-		const results = await (method === "values" ? d1Proxy.rawQuery(databaseId, sql, params) : d1Proxy.query(databaseId, sql, params))
-		console.log("RESULTS:", results)
-		console.log("-------------------------------------")
-		return results
-	}
-	return drizzleProxy(remoteCallback, config)
+	return drizzleProxy(async (sql, params, method) => {
+		// https://orm.drizzle.team/docs/connect-drizzle-proxy says
+		// Drizzle always waits for {rows: string[][]} or {rows: string[]} for the return value.
+		// When the method is get, you should return a value as {rows: string[]}.
+		// Otherwise, you should return {rows: string[][]}.
+		//
+		return method === "get" ? d1Proxy.query(databaseId, sql, params) : d1Proxy.rawQuery(databaseId, sql, params)
+	}, config)
 }
 
 class D1Proxy {
@@ -56,13 +56,3 @@ class D1Proxy {
 		return { rows: page.results ?? [] }
 	}
 }
-
-/*
-remoteCallback insert into "account" ("id", "account_id", "provider_id", "user_id", "access_token", "refresh_token", "id_token", "access_token_expires_at", "refresh_token_expires_at", "scope", "password", "created_at", "updated_at") values (?, null, ?, null, null, null, null, null, null, null, ?, ?, ?) returning "id", "account_id", "provider_id", "user_id", "access_token", "refresh_token", "id_token", "access_token_expires_at", "refresh_token_expires_at", "scope", "password", "created_at", "updated_at" [
-	'9UERMadnLTIHjkSMm3KVffT0E0QJwbc1',
-	'credential',
-	'31f2c15dbec32647e709f50be483a30f:10db9528b25d58b77b6a6f9e361f21fae410a5a096f5d03b6ed4176a2d91e2deda243a30246515f8461c0cea558e9f2c93dc829ffa6816e6619ba636f4aa83ff',
-	1747187848,
-	1747187848
-] all
-*/
