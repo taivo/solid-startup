@@ -16,19 +16,13 @@ export function drizzle<TSchema extends Record<string, unknown> = Record<string,
 	const d1Proxy = new D1Proxy({ accountId, apiToken: token })
 
 	const remoteCallback: Parameters<typeof drizzleProxy>[0] = async (sql, params, method) => {
-		console.log("remoteCallback:: sql:", sql, "params:", params, "method:", method)
-
-		return method === "values" ? d1Proxy.rawQuery(databaseId, sql, params) : d1Proxy.query(databaseId, sql, params)
+		console.log("METHOD:", method, "SQL:", sql, "  | PARAMS:", params)
+		const results = await (method === "values" ? d1Proxy.rawQuery(databaseId, sql, params) : d1Proxy.query(databaseId, sql, params))
+		console.log("RESULTS:", results)
+		console.log("-------------------------------------")
+		return results
 	}
 	return drizzleProxy(remoteCallback, config)
-}
-
-
-// looks like cloudflare 4.2.0 does not define "errors" in its database and query response types so we help out
-// typescript a little
-type WithErrors<T> = T & {
-	success: boolean
-	errors?: { code: string; message: string }[]
 }
 
 class D1Proxy {
@@ -45,14 +39,7 @@ class D1Proxy {
 	}
 
 	async rawQuery(databaseId: string, sql: string, params: DatabaseRawParams["params"]) {
-		const response = await this.d1.raw(databaseId, { account_id: this.#accountId, sql, params })
-		const {
-			result: [page],
-			errors,
-		} = response as WithErrors<typeof response>
-		if (errors) {
-			throw new Error(errors.map((it) => `${it.code}: ${it.message}`).join("\n"))
-		}
+		const { result: [page] } = await this.d1.raw(databaseId, { account_id: this.#accountId, sql, params })
 
 		// the "raw" endpoint is optimized to to return entries as array
 		// raw results is an object of {columns?: [], rows?: [][]}. We reformat it here to make "rows" non-optional
@@ -63,14 +50,7 @@ class D1Proxy {
 	}
 
 	async query(databaseId: string, sql: string, params: DatabaseQueryParams["params"]) {
-		const response = await this.d1.query(databaseId, { account_id: this.#accountId, sql, params })
-		const {
-			result: [page],
-			errors,
-		} = response as WithErrors<typeof response>
-		if (errors) {
-			throw new Error(errors.map((it) => `${it.code}: ${it.message}`).join("\n"))
-		}
+		const { result: [page] } = await this.d1.query(databaseId, { account_id: this.#accountId, sql, params })
 
 		// query results is an array of objects. Here we wrap it with {rows: []}
 		return { rows: page.results ?? [] }
