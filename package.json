@@ -13,6 +13,7 @@
 		"typegen": "wrangler types",
 		"db:generate": "drizzle-kit generate",
 		"db:migrate": "wrangler d1 migrations apply DB",
+		"db:migrate-prod": "pnpm db:migrate --remote",
 		"db:studio": "drizzle-kit studio",
 		"db:studio-prod": "NODE_ENV=production dotenvx run -- drizzle-kit studio",
 		"auth:generate-schema": "pnpx @better-auth/cli generate --output ./drizzle/schema/auth-schema.ts",

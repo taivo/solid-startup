@@ -37,6 +37,10 @@ export class D1Config {
 		return this.preview_database_id || this.database_id
 	}
 
+	get databaseId() {
+		return this.database_id
+	}
+
 	get sqliteLocalFile() {
 		const uniqueKey = "miniflare-D1DatabaseObject" as const
 		const miniflarePath = `.wrangler/state/v3/d1/${uniqueKey}`
@@ -47,28 +51,6 @@ export class D1Config {
 		}
 
 		return filename
-	}
-
-	get sqliteLocalCredentials() {
-		return {
-			url: `file:${D1Config.load().sqliteLocalFile}`,
-		}
-	}
-
-	get sqliteProxyCredentials() {
-		// biome-ignore lint/nursery/noProcessEnv: <explanation>
-		const { CLOUDFLARE_ACCOUNT_ID, CLOUDFLARE_D1_TOKEN } = process.env
-		if (!CLOUDFLARE_ACCOUNT_ID || !CLOUDFLARE_D1_TOKEN) {
-			throw new Error("CLOUDFLARE_ACCOUNT_ID and CLOUDFLARE_D1_TOKEN not set")
-		}
-
-		console.log("Using CLOUDFLARE_ACCOUNT_ID and CLOUDFLARE_D1_TOKEN to generate sqlite proxy credentials")
-
-		return {
-			accountId: CLOUDFLARE_ACCOUNT_ID as string,
-			databaseId: this.database_id as string,
-			token: CLOUDFLARE_D1_TOKEN as string,
-		}
 	}
 }
 

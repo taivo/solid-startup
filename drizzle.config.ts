@@ -1,5 +1,5 @@
 import { defineConfig } from "drizzle-kit"
-import { D1Config } from "./drizzle/d1-dev-helpers/d1-config-loader"
+import { d1LocalFileCredentials, d1RemoteProxyCredentials } from "./dev/script-helpers"
 
 export default defineConfig({
 	out: "./drizzle/migrations",
@@ -9,16 +9,16 @@ export default defineConfig({
 })
 
 function getEnvConfig() {
-	const d1Config = D1Config.load()
-	if (["remote", "production"].includes(process.env.NODE_ENV)) {
+	// biome-ignore lint/nursery/noProcessEnv: <explanation>
+	if (process.env.NODE_ENV === "production") {
 		return {
 			driver: "d1-http",
-			dbCredentials: d1Config.sqliteProxyCredentials,
+			dbCredentials: d1RemoteProxyCredentials(),
 		}
 	}
 
 	// else dev/local
 	return {
-		dbCredentials: d1Config.sqliteLocalCredentials,
+		dbCredentials: d1LocalFileCredentials(),
 	}
 }
