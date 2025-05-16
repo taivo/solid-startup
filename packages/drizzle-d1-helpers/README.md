@@ -1,16 +1,16 @@
 # Why is this needed?
 
-In production, it's easy to access D1 with Drizzle via Cloudflare bindings. However, during development, local scripting, or drizzle-kit, different mechanisms are needed to acquire access to the D1 database. This table
-illustrates those scenarios
+In production, it's easy to access D1 with Drizzle via Cloudflare bindings. However, during development, local scripting, or drizzle-kit, different mechanisms are needed to acquire access to the D1 database. This is illustrated in the table below
 
 
-Scenario                     | solution provided or simplified by this package | Applicable to
------------------------------|-----------------------------------------------------------------
-server dev local db          | getPlatformProxy() to obtain miniflare binding  |
-running scripts on local db  | getPlatformProxy() to obtain miniflare binding  | drizzle-seed, any node script
-running scripts on remote db | custom d1-http driver                           | drizzle-seed, any node script
+Scenario                     | solution provided or simplified by this package            | Applicable to |
+-----------------------------|------------------------------------------------------------|----------------
+server dev local db          | getPlatformProxy() to obtain miniflare binding             |
+running scripts on local db  | getPlatformProxy() to obtain miniflare binding             | drizzle-seed, any node script
+running scripts on remote db | custom d1-http driver                                      | drizzle-seed, any node script
 drizzle-kit on local db      | parse wrangler config and locate the miniflare sqlite file | migrate, studio
 drizzle-kit on remote db     | parse wrangler config to get databaseId and format access credential | migrate, studio
+
 
 # Installation
 ```
