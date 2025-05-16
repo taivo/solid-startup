@@ -13,10 +13,15 @@ export class D1Config {
 	static load(bindingName?: string) {
 		const d1_databases = D1Config.loadRawD1Configs()
 
-		if (d1_databases.length === 1 && !bindingName) {
+		if (!bindingName) {
+			if (d1_databases.length > 1) {
+				throw new Error("There are more than one D1 database in wrangler config. Please specify which.")
+			}
+
 			// return the only config if no bindingName is specified
 			return new D1Config(d1_databases[0])
 		}
+
 
 		// find and return the specified binding
 		const cfg = d1_databases.find((db: { binding: string }) => db.binding === bindingName)
@@ -56,6 +61,23 @@ export class D1Config {
 		}
 
 		return filename
+	}
+
+	getD1LocalFileCredentials() {
+		// NOTE 5/15/2025: currently this is only used by drizzle-kit.
+		// Local scripts use bindings from getPlatformProxy()
+		//
+		return {
+			url: `file:${this.sqliteLocalFile}`,
+		}
+	}
+
+	getD1ProxyCredentials(accountId: string, token: string) {
+		return {
+			accountId,
+			token,
+			databaseId: this.databaseId,
+		}
 	}
 }
 

@@ -3,9 +3,8 @@ import { betterAuth } from "better-auth"
 import { drizzleAdapter } from "better-auth/adapters/drizzle"
 import {
 	type BoundD1,
+	D1Config,
 	type ProxyD1,
-	getD1LocalFileCredentials,
-	getD1ProxyCredentials,
 	withLocalD1,
 	withProxyD1,
 } from "drizzle-d1-helpers"
@@ -50,10 +49,10 @@ export function d1RemoteProxyCredentials() {
 	}
 	console.log("Using CLOUDFLARE_ACCOUNT_ID and CLOUDFLARE_D1_TOKEN to generate sqlite proxy credentials")
 
-	return getD1ProxyCredentials(CLOUDFLARE_ACCOUNT_ID, CLOUDFLARE_D1_TOKEN)
+	return D1Config.load().getD1ProxyCredentials(CLOUDFLARE_ACCOUNT_ID, CLOUDFLARE_D1_TOKEN)
 }
 
 export function d1LocalFileCredentials() {
 	// only used by drizzle-kit. Other local scripts use bindings from getPlatformProxy()
-	return getD1LocalFileCredentials()
+	return D1Config.load().getD1LocalFileCredentials()
 }

@@ -28,24 +28,26 @@ withLocalD1("DB", async (db) => {
 ## Remote d1 scripting
 ```
 const {CLOUDFLARE_ACCOUNT_ID: accountId, CLOUDFLARE_D1_TOKEN: apiToken } = process.env
-const d1Credentials = getD1ProxyCredentials(accountId, apiToken)
+const d1Credentials = D1Config.load().getD1ProxyCredentials(accountId, apiToken)
 withProxyD1(d1Credentials, async (db) => {
 	// do work on remote db
 })
 ```
 
-## Local d1 credentials for drizzle-kit
+## D1 Credentials for drizzle-kit
 
-`getD1LocalFileCredentials()` returns an object that looks something like this
+`D1Config.load(D1_BINDING_NAME)` will load the corresponding d1 binding from wrangler config. If there
+is only 1 D1 binding in the config, the argument can be left empty. This function returns a `D1Config` class instance.
+
+With it, you can use `d1Config.getD1LocalFileCredentials()` to get the local credentials
 
 ```
 {
 		url: "file:.wrangler/state/v3/d1/miniflare-D1DatabaseObject/a9be733ec67eab6dbefcb5090b084c719daf1851f57b2901eda41a3e4683d794.sqlite",
 	}
 ```
-
 The hash is generated in this package using the same hashing mechanism mentioned by [cloudflare here](https://github.com/cloudflare/miniflare/releases/tag/v3.20230918.0)
 
-## Remote d1 credentials for drizzle-kit
-`getD1ProxyCredentials(accountId, apiToken)` automatically parses the wrangler configuration to get the databaseId and put the 3 pieces of information together for drizzle. You'll need to
-supply the accountId and apiToken, probably by setting and parsing `process.env`
+Similarly, `d1Config.getD1ProxyCredentials(accountId, apiToken)` can be used to put together
+the remote credentials. You'll need to provide the accountId and apiToken yourself, possibly by
+setting and using `process.env`

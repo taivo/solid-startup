@@ -2,6 +2,7 @@ import { drizzle as drizzleD1 } from "drizzle-orm/d1"
 import { getPlatformProxy } from "wrangler"
 import { D1Config } from "./d1-config-loader.js"
 import { drizzle as drizzleD1Proxy } from "./d1-proxy.js"
+export { D1Config }
 
 export type BoundD1 = ReturnType<typeof drizzleD1>
 export type ProxyD1 = ReturnType<typeof drizzleD1Proxy>
@@ -27,21 +28,4 @@ export async function withProxyD1(
 ) {
 	const db = drizzleD1Proxy({ accountId, token, databaseId })
 	await doWerk(db)
-}
-
-export function getD1LocalFileCredentials() {
-	// NOTE 5/15/2025: currently this is only used by drizzle-kit.
-	// Local scripts use bindings from getPlatformProxy()
-	//
-	return {
-		url: `file:${D1Config.load().sqliteLocalFile}`,
-	}
-}
-
-export function getD1ProxyCredentials(accountId: string, token: string) {
-	return {
-		accountId,
-		token,
-		databaseId: D1Config.load().databaseId,
-	}
 }
