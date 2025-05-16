@@ -6,12 +6,12 @@ import { drizzle as drizzleD1Proxy } from "./d1-proxy.js"
 export type BoundD1 = ReturnType<typeof drizzleD1>
 export type ProxyD1 = ReturnType<typeof drizzleD1Proxy>
 
-export async function withLocalD1<Env>(bindingName: string, doWerk: (db: BoundD1) => Promise<void>) {
+export async function withLocalD1<Env>(bindingName: keyof Env, doWerk: (db: BoundD1) => Promise<void>) {
 	const platform = await getPlatformProxy<Env>()
 
-	const binding = platform.env[bindingName as keyof typeof platform.env]
+	const binding = platform.env[bindingName]
 	if (!binding) {
-		throw new Error(`Could not find D1 binding: [${bindingName}]. Check your wrangler config file.`)
+		throw new Error(`Could not find D1 binding: [${bindingName.toString()}]. Check your wrangler config file.`)
 	}
 
 	const db = drizzleD1(binding)

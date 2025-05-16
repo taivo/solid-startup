@@ -8,7 +8,7 @@ import {
 	getD1ProxyCredentials,
 	withLocalD1,
 	withProxyD1,
-} from "~drizzle/d1-dev-helpers"
+} from "drizzle-d1-helpers"
 import { authSchema } from "~drizzle/index"
 
 export type Database = BoundD1 | ProxyD1
@@ -26,7 +26,7 @@ export async function withDatabase(dbEnv: "local" | "remote", doWerk: (db: Datab
 			process.exit(0)
 		}
 	} else {
-		withLocalD1(doWerk)
+		withLocalD1("DB", doWerk)
 	}
 }
 
