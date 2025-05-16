@@ -1,7 +1,7 @@
 {
 	"compilerOptions": {
-		"target": "ESNext",
-		"module": "ESNext",
+		"target": "es2022",
+		"module": "es2022",
 		"moduleResolution": "bundler",
 		"allowSyntheticDefaultImports": true,
 		"resolveJsonModule": true,
@@ -9,7 +9,7 @@
 		"jsx": "preserve",
 		"allowJs": true,
 		"strict": true,
-		"noEmit": true,
-		"isolatedModules": true
-	}
+		"declaration": true
+	},
+	"include": ["src/**/*"]
 }
