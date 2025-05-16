@@ -3,7 +3,7 @@
 In production, it's easy to access D1 with Drizzle via Cloudflare bindings. However, during development, local scripting, or drizzle-kit, different mechanisms are needed to acquire access to the D1 database. This is illustrated in the table below
 
 
-Scenario                     | solution provided or simplified by this package            | Applicable to |
+Scenario                     | Solution provided or simplified by this package            | Applicable to |
 -----------------------------|------------------------------------------------------------|----------------
 server dev local db          | getPlatformProxy() to obtain miniflare binding             |
 running scripts on local db  | getPlatformProxy() to obtain miniflare binding             | drizzle-seed, any node script
