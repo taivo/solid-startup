@@ -57,7 +57,7 @@ The hash is generated in this package using the same hashing mechanism mentioned
 
 Similarly, `d1Config.databaseId` can be used to put together the remote credentials. You'll need to provide the accountId and apiToken yourself. Here is an example drizzle.config.ts
 
-```
+```typescript
 export default defineConfig({
 	out: "./drizzle/migrations",
 	schema: "./drizzle/schema",
