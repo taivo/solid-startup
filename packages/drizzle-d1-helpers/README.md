@@ -19,27 +19,38 @@ drizzle-kit on remote db     | parse wrangler config to get databaseId and forma
 # Usage
 
 ## Local d1 scripting
-```
+
+```typescript
+
 withLocalD1("DB", async (db) => {
 	// do whatever you need with the db that is locally bound to "DB" in wrangler config
 })
+
 ```
 
 ## Remote d1 scripting
-```
+
+```typescript
+
 const {CLOUDFLARE_ACCOUNT_ID: accountId, CLOUDFLARE_D1_TOKEN: apiToken } = process.env
-const d1Credentials = D1Config.load().getD1ProxyCredentials(accountId, apiToken)
+const d1Credentials = {
+	accountId: process.env.CLOUDFLARE_ACCOUNT_ID,
+	token: process.env.CLOUDFLARE_API_TOKEN,
+	databaseId: D1Config.load("MY_D1").databaseId
+}
+
 withProxyD1(d1Credentials, async (db) => {
 	// do work on remote db
 })
+
 ```
 
 ## D1 Credentials for drizzle-kit
 
 `D1Config.load(D1_BINDING_NAME)` will load the corresponding d1 binding from wrangler config. If there
-is only 1 D1 binding in the config, the argument can be left empty. This function returns a `D1Config` class instance.
+is only one D1 binding in the config, the argument can be left empty. This function returns a `D1Config` class instance.
 
-With it, you can use `d1Config.sqliteLocalFile` to get a filename that looks like this `.wrangler/state/v3/d1/miniflare-D1DatabaseObject/a9be733ec67eab6dbefcb5090b084c719daf1851f57b2901eda41a3e4683d794.sqlite`
+With it, `d1Config.sqliteLocalFile` will give you a filename that looks like this `.wrangler/state/v3/d1/miniflare-D1DatabaseObject/a9be733ec67eab6dbefcb5090b084c719daf1851f57b2901eda41a3e4683d794.sqlite`
 
 The hash is generated in this package using the same hashing mechanism mentioned by [cloudflare here](https://github.com/cloudflare/miniflare/releases/tag/v3.20230918.0).
 
@@ -74,3 +85,5 @@ function getEnvConfig() {
 	}
 }
 ```
+
+# Happy Coding!!
