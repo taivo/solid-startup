@@ -1,0 +1,25 @@
+{
+	"name": "drizzle-d1-helpers",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"packageManager": "pnpm@10.10.0",
+	"devDependencies": {
+		"cloudflare": "^4.2.0",
+		"drizzle-orm": "^0.43.1",
+		"typescript": "^5.8.3",
+		"wrangler": "^4.15.2"
+	},
+	"engines": {
+		"node": ">=22.0.0"
+	},
+	"peerDependencies": {
+		"drizzle-orm": "^0.43.1"
+	}
+}
