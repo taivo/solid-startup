@@ -1,5 +1,5 @@
 import { defineConfig } from "drizzle-kit"
-import { d1LocalFileCredentials, d1RemoteProxyCredentials } from "./dev/script-helpers"
+import { d1LocalFileCredentials, d1RemoteProxyCredentials } from "../../dev/script-helpers"
 
 export default defineConfig({
 	out: "./drizzle/migrations",

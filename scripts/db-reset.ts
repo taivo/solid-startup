@@ -1,6 +1,6 @@
 import { reset } from "drizzle-seed"
-import { fullSchema } from "~drizzle/index"
 import { withDatabase } from "../dev/script-helpers"
+import { fullSchema } from "../packages/common-database/src/index"
 
 //
 // https://orm.drizzle.team/docs/seed-overview

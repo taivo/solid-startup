@@ -8,7 +8,7 @@ import {
 	withLocalD1,
 	withProxyD1,
 } from "drizzle-d1-helpers"
-import { authSchema } from "~drizzle/index"
+import { authSchema } from "../packages/common-database/dist"
 
 export type Database = BoundD1 | ProxyD1
 export async function withDatabase(dbEnv: "local" | "remote", doWerk: (db: Database) => Promise<void>) {
