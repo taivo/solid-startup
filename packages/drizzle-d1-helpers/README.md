@@ -39,15 +39,38 @@ withProxyD1(d1Credentials, async (db) => {
 `D1Config.load(D1_BINDING_NAME)` will load the corresponding d1 binding from wrangler config. If there
 is only 1 D1 binding in the config, the argument can be left empty. This function returns a `D1Config` class instance.
 
-With it, you can use `d1Config.getD1LocalFileCredentials()` to get the local credentials
+With it, you can use `d1Config.sqliteLocalFile` to get a filename that looks like this `.wrangler/state/v3/d1/miniflare-D1DatabaseObject/a9be733ec67eab6dbefcb5090b084c719daf1851f57b2901eda41a3e4683d794.sqlite`
+
+The hash is generated in this package using the same hashing mechanism mentioned by [cloudflare here](https://github.com/cloudflare/miniflare/releases/tag/v3.20230918.0).
+
+
+Similarly, `d1Config.databaseId` can be used to put together the remote credentials. You'll need to provide the accountId and apiToken yourself. Here is an example drizzle.config.ts
 
 ```
-{
-		url: "file:.wrangler/state/v3/d1/miniflare-D1DatabaseObject/a9be733ec67eab6dbefcb5090b084c719daf1851f57b2901eda41a3e4683d794.sqlite",
+export default defineConfig({
+	out: "./drizzle/migrations",
+	schema: "./drizzle/schema",
+	dialect: "sqlite",
+	...getEnvConfig(),
+})
+
+function getEnvConfig() {
+	if (process.env.NODE_ENV === "production") {
+		return {
+			driver: "d1-http",
+			dbCredentials: {
+				accountId: process.env.CLOUDFLARE_ACCOUNT_ID,
+				token: process.env.CLOUDFLARE_API_TOKEN,
+				databaseId: D1Config.load("MY_D1").databaseId
+			},
+		}
 	}
-```
-The hash is generated in this package using the same hashing mechanism mentioned by [cloudflare here](https://github.com/cloudflare/miniflare/releases/tag/v3.20230918.0)
 
-Similarly, `d1Config.getD1ProxyCredentials(accountId, apiToken)` can be used to put together
-the remote credentials. You'll need to provide the accountId and apiToken yourself, possibly by
-setting and using `process.env`
+	// else dev/local
+	return {
+		dbCredentials: {
+			url: `file:${D1Config.load("MY_D1").sqliteLocalFile}`
+		},
+	}
+}
+```

@@ -62,23 +62,6 @@ export class D1Config {
 
 		return filename
 	}
-
-	getD1LocalFileCredentials() {
-		// NOTE 5/15/2025: currently this is only used by drizzle-kit.
-		// Local scripts use bindings from getPlatformProxy()
-		//
-		return {
-			url: `file:${this.sqliteLocalFile}`,
-		}
-	}
-
-	getD1ProxyCredentials(accountId: string, token: string) {
-		return {
-			accountId,
-			token,
-			databaseId: this.databaseId,
-		}
-	}
 }
 
 function durableObjectNamespaceIdFromName(uniqueKey: string, name: string) {

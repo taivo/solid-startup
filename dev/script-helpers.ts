@@ -41,7 +41,7 @@ export function initAuthApi(db: Database) {
 	}).api
 }
 
-export function d1RemoteProxyCredentials() {
+export function d1RemoteProxyCredentials(bindingName?: string) {
 	// biome-ignore lint/nursery/noProcessEnv: <explanation>
 	const { CLOUDFLARE_ACCOUNT_ID, CLOUDFLARE_D1_TOKEN } = process.env
 	if (!CLOUDFLARE_ACCOUNT_ID || !CLOUDFLARE_D1_TOKEN) {
@@ -49,10 +49,18 @@ export function d1RemoteProxyCredentials() {
 	}
 	console.log("Using CLOUDFLARE_ACCOUNT_ID and CLOUDFLARE_D1_TOKEN to generate sqlite proxy credentials")
 
-	return D1Config.load().getD1ProxyCredentials(CLOUDFLARE_ACCOUNT_ID, CLOUDFLARE_D1_TOKEN)
+	return {
+		accountId: CLOUDFLARE_ACCOUNT_ID,
+		token: CLOUDFLARE_D1_TOKEN,
+		databaseId: D1Config.load(bindingName).databaseId,
+	}
 }
 
-export function d1LocalFileCredentials() {
-	// only used by drizzle-kit. Other local scripts use bindings from getPlatformProxy()
-	return D1Config.load().getD1LocalFileCredentials()
+export function d1LocalFileCredentials(bindingName?: string) {
+	// NOTE 5/15/2025: currently this is only used by drizzle-kit.
+	// Local scripts use bindings from getPlatformProxy()
+	//
+	return {
+		url: `file:${D1Config.load(bindingName).sqliteLocalFile}`,
+	}
 }
