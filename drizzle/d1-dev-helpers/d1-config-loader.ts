@@ -2,6 +2,7 @@ import crypto from "node:crypto"
 import { existsSync } from "node:fs"
 import { unstable_readConfig } from "wrangler"
 
+
 export class D1Config {
 	binding: string
 	database_name: string
@@ -10,7 +11,7 @@ export class D1Config {
 	migrations_dir?: string
 
 	static load(bindingName?: string) {
-		const d1_databases = unstable_readConfig({}).d1_databases
+		const d1_databases = D1Config.loadRawD1Configs()
 
 		if (d1_databases.length === 1 && !bindingName) {
 			// return the only config if no bindingName is specified
@@ -25,10 +26,14 @@ export class D1Config {
 		return new D1Config(cfg)
 	}
 
-	private constructor(cfg: Record<string, string>) {
+	static loadRawD1Configs() {
+		return unstable_readConfig({}).d1_databases
+	}
+
+	private constructor(cfg: ReturnType<typeof D1Config.loadRawD1Configs>[number]) {
 		this.binding = cfg.binding
-		this.database_name = cfg.database_name
-		this.database_id = cfg.database_id
+		this.database_name = cfg.database_name ?? ""
+		this.database_id = cfg.database_id ?? ""
 		this.preview_database_id = cfg.preview_database_id
 		this.migrations_dir = cfg.migrations_dir
 	}
