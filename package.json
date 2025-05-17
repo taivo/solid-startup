@@ -13,7 +13,7 @@
 		"typegen": "wrangler types",
 		"auth:generate-schema": "pnpx @better-auth/cli generate --output ./drizzle/schema/auth-schema.ts",
 		"ui:add": "pnpx solidui-cli@latest add",
-		"runscript": "dotenvx run -- tsx ./dev/script-runner",
+		"runscript": "dev-helpers",
 		"knip": "knip"
 	},
 	"type": "module",
