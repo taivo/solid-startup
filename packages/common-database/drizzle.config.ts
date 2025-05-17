@@ -1,9 +1,10 @@
 import { defineConfig } from "drizzle-kit"
 import { d1LocalFileCredentials, d1RemoteProxyCredentials } from "../../dev/script-helpers"
 
+
 export default defineConfig({
-	out: "./drizzle/migrations",
-	schema: "./drizzle/schema",
+	out: "./migrations",
+	schema: "./schema",
 	dialect: "sqlite",
 	...getEnvConfig(),
 })

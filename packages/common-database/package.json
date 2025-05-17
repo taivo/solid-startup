@@ -10,11 +10,11 @@
 	"type": "module",
 	"scripts": {
 		"build": "tsup",
-		"db:generate": "drizzle-kit generate",
-		"db:migrate": "wrangler d1 migrations apply DB",
-		"db:migrate-prod": "pnpm db:migrate --remote",
-		"db:studio": "drizzle-kit studio",
-		"db:studio-prod": "NODE_ENV=production dotenvx run -- drizzle-kit studio"
+		"generate": "drizzle-kit generate",
+		"migrate": "wrangler d1 migrations apply DB",
+		"migrate-prod": "pnpm db:migrate --remote",
+		"studio": "drizzle-kit studio",
+		"studio-prod": "dotenvx run -f ../../.env -e NODE_ENV=production -- drizzle-kit studio"
 	},
 	"packageManager": "pnpm@10.10.0",
 	"dependencies": {
