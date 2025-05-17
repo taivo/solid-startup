@@ -1,7 +1,9 @@
 import crypto from "node:crypto"
 import { existsSync } from "node:fs"
+import path from "node:path"
 import { unstable_readConfig } from "wrangler"
 
+type D1Cfg = ReturnType<typeof unstable_readConfig>["d1_databases"][number] & { rootPath?: string }
 
 export class D1Config {
 	binding: string
@@ -10,37 +12,38 @@ export class D1Config {
 	preview_database_id?: string
 	migrations_dir?: string
 
+	#rootPath?: string
+
 	static load(bindingName?: string) {
-		const d1_databases = D1Config.loadRawD1Configs()
+		const fullCfg = unstable_readConfig({})
+		const { d1_databases, configPath } = fullCfg
 
-		if (!bindingName) {
-			if (d1_databases.length > 1) {
-				throw new Error("There are more than one D1 database in wrangler config. Please specify which.")
-			}
-
-			// return the only config if no bindingName is specified
-			return new D1Config(d1_databases[0])
+		if (!bindingName && d1_databases.length > 1) {
+			throw new Error("There are more than one D1 database in wrangler config. Please specify which.")
 		}
 
-
 		// find and return the specified binding
-		const cfg = d1_databases.find((db: { binding: string }) => db.binding === bindingName)
+		const cfg = (!bindingName && d1_databases.length === 1) ?
+			d1_databases[0] :
+			d1_databases.find((d1: { binding: string }) => d1.binding === bindingName)
+
 		if (!cfg) {
 			throw new Error(`Could not find wrangler config for D1 binding: [${bindingName}]`)
 		}
-		return new D1Config(cfg)
+
+		return new D1Config({ ...cfg, rootPath: configPath ? path.dirname(configPath) : undefined })
 	}
 
-	static loadRawD1Configs() {
-		return unstable_readConfig({}).d1_databases
-	}
-
-	private constructor(cfg: ReturnType<typeof D1Config.loadRawD1Configs>[number]) {
+	private constructor(cfg: D1Cfg) {
 		this.binding = cfg.binding
 		this.database_name = cfg.database_name ?? ""
 		this.database_id = cfg.database_id ?? ""
 		this.preview_database_id = cfg.preview_database_id
 		this.migrations_dir = cfg.migrations_dir
+
+		// help with locating non-default root dir for miniflare sqlite filename
+		// For example, when drizzle.config.ts is located in a monorepo package instead of top level.
+		this.#rootPath = cfg.rootPath
 	}
 
 	get localDatabaseId() {
@@ -54,7 +57,8 @@ export class D1Config {
 	get sqliteLocalFile() {
 		const uniqueKey = "miniflare-D1DatabaseObject" as const
 		const miniflarePath = `.wrangler/state/v3/d1/${uniqueKey}`
-		const filename = `${miniflarePath}/${durableObjectNamespaceIdFromName(uniqueKey, this.localDatabaseId)}.sqlite`
+		const hash = durableObjectNamespaceIdFromName(uniqueKey, this.localDatabaseId)
+		const filename = path.relative(".", path.join(this.#rootPath ?? "", miniflarePath, `${hash}.sqlite`))
 
 		if (!existsSync(filename)) {
 			throw new Error(`Could not find Sqlite file: [${filename}] for databaseId [${this.localDatabaseId}]`)
