@@ -13,7 +13,11 @@
 		"build": "tsup"
 	},
 	"packageManager": "pnpm@10.10.0",
-	"dependencies": {},
+	"dependencies": {
+		"@inquirer/prompts": "^7.5.1",
+		"common-database": "workspace:*",
+		"drizzle-d1-helpers": "workspace:*"
+	},
 	"engines": {
 		"node": ">=22",
 		"pnpm": ">=10"

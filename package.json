@@ -39,7 +39,6 @@
 		"@dotenvx/dotenvx": "^1.44.0",
 		"@iconify-json/lucide": "^1.2.43",
 		"@iconify-json/tabler": "^1.2.17",
-		"@inquirer/prompts": "^7.5.1",
 		"@kobalte/tailwindcss": "^0.9.0",
 		"@solidjs/testing-library": "^0.8.10",
 		"@tailwindcss/vite": "^4.1.7",

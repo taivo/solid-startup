@@ -1,6 +1,7 @@
 import { confirm } from "@inquirer/prompts"
 import { betterAuth } from "better-auth"
 import { drizzleAdapter } from "better-auth/adapters/drizzle"
+import { authSchema } from "common-database"
 import {
 	type BoundD1,
 	D1Config,
@@ -8,7 +9,6 @@ import {
 	withLocalD1,
 	withProxyD1,
 } from "drizzle-d1-helpers"
-import { authSchema } from "../packages/common-database/dist"
 
 export type Database = BoundD1 | ProxyD1
 export async function withDatabase(dbEnv: "local" | "remote", doWerk: (db: Database) => Promise<void>) {
