@@ -12,7 +12,7 @@
 	"type": "module",
 	"scripts": {
 		"build": "tsup",
-		"testrun": "tsx src/cli runscript -p ../../../scripts"
+		"testrun": "dist/cli.mjs db-reset --path ../../../scripts"
 	},
 	"packageManager": "pnpm@10.10.0",
 	"dependencies": {

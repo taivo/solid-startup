@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 
 import path from "node:path"
-import { createCommand, program } from "@commander-js/extra-typings"
+import { createCommand, program } from "commander/esm.mjs"
+import type { CliOptions } from "./common"
 
 async function main() {
 	program
-		.command("runscript")
+		.name("runscript")
 		.argument("<scriptname>", "The script to run")
 		.option("-p --path <path>", "The path prefix to the script", ".")
 		.allowExcessArguments()
@@ -20,11 +21,13 @@ async function main() {
 
 async function loadScriptAsCommand(pathPrefix: string, scriptName: string) {
 	const fname = path.join(pathPrefix, `${scriptName}`)
+
+	console.log("SCRIPT NAME", scriptName, "fname", fname)
 	const { options: scriptOptions = {}, default: scriptAction } = await import(fname)
 
 	const cmd = createCommand(scriptName)
 	for (const [spec, { description, coerce, default: defaultVal, required }] of Object.entries(
-		scriptOptions as ScriptOptions
+		scriptOptions as CliOptions
 	)) {
 		if (required) {
 			// biome-ignore lint/style/noNonNullAssertion: <explanation>
@@ -44,13 +47,3 @@ main()
 // to get printed upon importing a module. Without this, scripts that prompt the user for input
 // may have its prompt messages interlaced with the Nodejs warnings
 //await setTimeout(1)
-
-type OptionExtra<T = string> = {
-	description: string
-	default?: T
-	required?: boolean
-	coerce?: (v: string, previous: string) => T
-}
-export type ScriptOptions = {
-	[spec: string]: OptionExtra
-}

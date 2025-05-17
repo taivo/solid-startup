@@ -10,6 +10,8 @@ import {
 	withProxyD1,
 } from "drizzle-d1-helpers"
 
+export type { CliOptions } from "./common"
+
 export type Database = BoundD1 | ProxyD1
 export async function withDatabase(dbEnv: "local" | "remote", doWerk: (db: Database) => Promise<void>) {
 	if (dbEnv === "remote") {

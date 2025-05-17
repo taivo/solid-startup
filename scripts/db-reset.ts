@@ -1,13 +1,20 @@
-import { reset } from "drizzle-seed"
-import { withDatabase } from "../dev/script-helpers"
-import { fullSchema } from "../packages/common-database/src/index"
+import type { CliOptions } from "local-script"
 
 //
 // https://orm.drizzle.team/docs/seed-overview
 //
-export default async function dbReset(args: string[]) {
-	const dbTarget = args.includes("--remote") ? "remote" : "local"
-	withDatabase(dbTarget, async (db) => {
-		await reset(db, fullSchema)
-	})
+
+export const options = {
+	"-a --alpha <alpha>": {
+		description: "alpha option",
+		default: "a",
+	},
+} satisfies CliOptions
+
+export default async function dbReset(cliOptions: Record<string, any>) {
+	console.log(cliOptions)
+	// const dbTarget = args.includes("--remote") ? "remote" : "local"
+	// withDatabase(dbTarget, async (db) => {
+	// 	await reset(db, fullSchema)
+	// })
 }

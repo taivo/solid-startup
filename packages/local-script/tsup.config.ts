@@ -2,7 +2,7 @@ import { defineConfig } from 'tsup'
 
 export default defineConfig({
 	entry: {
-		index: 'src/index.ts',
+		index: 'src/helpers.ts',
 		cli: 'src/cli.ts',
 	},
 	splitting: false,
@@ -11,6 +11,7 @@ export default defineConfig({
 	dts: true,
 	clean: true,
 	skipNodeModulesBundle: true,
+	noExternal: ["commander/esm.mjs"],
 	outExtension({ format }) {
 		return { js: (format === "esm" ? ".mjs" : ".js") }
 	},
