@@ -1,0 +1,24 @@
+{
+	"name": "dev-helpers",
+	"version": "0.1.0",
+	"description": "Utilities for dev mode and for running local scripts",
+	"private": true,
+	"license": "UNLICENSED",
+	"author": "taivo",
+	"main": "dist/index.mjs",
+	"types": "dist/index.d.ts",
+	"keywords": [],
+	"type": "module",
+	"scripts": {
+		"build": "tsup"
+	},
+	"packageManager": "pnpm@10.10.0",
+	"dependencies": {},
+	"engines": {
+		"node": ">=22",
+		"pnpm": ">=10"
+	},
+	"devDependencies": {
+		"tsup": "^8.4.0"
+	}
+}

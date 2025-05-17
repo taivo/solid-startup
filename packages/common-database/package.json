@@ -3,10 +3,11 @@
 	"version": "0.1.0",
 	"description": "Isolate database definition in its own package for reusability and separation of concerns",
 	"private": true,
+	"license": "UNLICENSED",
+	"author": "taivo",
 	"main": "dist/index.mjs",
 	"types": "dist/index.d.ts",
 	"keywords": [],
-	"author": "taivo",
 	"type": "module",
 	"scripts": {
 		"build": "tsup",
