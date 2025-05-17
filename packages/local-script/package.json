@@ -1,5 +1,5 @@
 {
-	"name": "dev-helpers",
+	"name": "local-script",
 	"version": "0.1.0",
 	"description": "Utilities for dev mode and for running local scripts",
 	"private": true,

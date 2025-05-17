@@ -38,6 +38,9 @@ importers:
       drizzle-orm:
         specifier: ^0.43.1
         version: 0.43.1(@libsql/client@0.15.6)(gel@2.0.2)(kysely@0.28.2)
+      local-script:
+        specifier: workspace:*
+        version: link:packages/local-script
       lodash-es:
         specifier: ^4.17.21
         version: 4.17.21
@@ -93,9 +96,6 @@ importers:
       cloudflare:
         specifier: ^4.2.0
         version: 4.2.0
-      dev-helpers:
-        specifier: workspace:*
-        version: link:packages/dev-helpers
       drizzle-seed:
         specifier: ^0.3.1
         version: 0.3.1(drizzle-orm@0.43.1(@libsql/client@0.15.6)(gel@2.0.2)(kysely@0.28.2))
@@ -194,6 +194,28 @@ importers:
       wrangler:
         specifier: ^4.15.2
         version: 4.15.2
+    devDependencies:
+      tsup:
+        specifier: ^8.4.0
+        version: 8.5.0(jiti@2.4.2)(postcss@8.5.3)(tsx@4.19.3)(typescript@5.8.3)
+
+  packages/local-script:
+    dependencies:
+      '@commander-js/extra-typings':
+        specifier: ^13.1.0
+        version: 13.1.0(commander@13.1.0)
+      '@inquirer/prompts':
+        specifier: ^7.5.1
+        version: 7.5.1(@types/node@22.15.18)
+      commander:
+        specifier: ^13.1.0
+        version: 13.1.0
+      common-database:
+        specifier: workspace:*
+        version: link:../common-database
+      drizzle-d1-helpers:
+        specifier: workspace:*
+        version: link:../drizzle-d1-helpers
     devDependencies:
       tsup:
         specifier: ^8.4.0
